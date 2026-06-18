@@ -249,7 +249,10 @@ section { padding: 0 10%; box-sizing: border-box; position: relative; }
 section h2 {
   font-family: var(--font-head); font-size: 2rem; font-weight: 400;
   letter-spacing: 4px; text-align: center; text-transform: uppercase;
-  margin-top: -50px; z-index: 100; color: var(--white);
+  margin-top: 0;
+  padding-top: 10px;
+   z-index: 100; 
+   color: var(--white);
 }
 section p { max-width: 800px; margin: 0 auto; line-height: 1.7; color: var(--muted); }
 
@@ -417,41 +420,84 @@ section p { max-width: 800px; margin: 0 auto; line-height: 1.7; color: var(--mut
    BRIDGE
 ══════════════════════════════════════════ */
 .section-bridge {
-  position: relative; width: 100%; height: 180px;
-  overflow: hidden; pointer-events: none;
-  background-image: radial-gradient(circle, rgba(0,245,255,0.12) 1px, transparent 1px);
-  background-size: 28px 28px;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
+  position: relative;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: visible;
 }
-.bridge-blob-glow {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  width: 420px; height: 140px; border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(0,245,255,0.07) 0%, rgba(61,61,239,0.04) 50%, transparent 70%);
-  animation: bridgeGlow 4s ease-in-out infinite;
+
+.bridge-line-left,
+.bridge-line-right {
+  flex: 1;
+  height: 1px;
+  max-width: calc(50% - 28px);
 }
-@keyframes bridgeGlow {
-  0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
-  50%      { opacity: 1;   transform: translate(-50%,-50%) scale(1.08); }
+
+.bridge-line-left {
+  background: linear-gradient(to right, transparent, rgba(0,245,255,0.38));
 }
-.bridge-center {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  display: flex; align-items: center; gap: 0;
+
+.bridge-line-right {
+  background: linear-gradient(to left, transparent, rgba(0,245,255,0.38));
 }
-.bridge-line       { width: 100px; height: 1px; background: linear-gradient(to right, transparent, rgba(0,245,255,0.3)); }
-.bridge-line.right { background: linear-gradient(to left, transparent, rgba(0,245,255,0.3)); }
-.bridge-dot-outer  { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(0,245,255,0.15); display: flex; align-items: center; justify-content: center; }
-.bridge-dot-mid    { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(0,245,255,0.25); display: flex; align-items: center; justify-content: center; }
-.bridge-dot-inner  {
-  width: 7px; height: 7px; border-radius: 50%; background: var(--cyan);
+
+.bridge-cross {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.bridge-cross::before,
+.bridge-cross::after {
+  content: '';
+  position: absolute;
+  background: rgba(0,245,255,0.45);
+  border-radius: 1px;
+}
+
+.bridge-cross::before {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.bridge-cross::after {
+  width: 1px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.bridge-cross-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #00f5ff;
   box-shadow: 0 0 10px rgba(0,245,255,0.9), 0 0 22px rgba(0,245,255,0.4);
-  animation: bridgePulse 2.5s ease-in-out infinite;
+  animation: crossDotPulse 2.5s ease-in-out infinite;
 }
-@keyframes bridgePulse {
-  0%,100% { transform: scale(1);   box-shadow: 0 0 10px rgba(0,245,255,0.9), 0 0 22px rgba(0,245,255,0.4); }
-  50%      { transform: scale(1.3); box-shadow: 0 0 16px #00f5ff, 0 0 38px rgba(0,245,255,0.5); }
+
+@keyframes crossDotPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 10px rgba(0,245,255,0.9), 0 0 22px rgba(0,245,255,0.4);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.4);
+    box-shadow: 0 0 16px #00f5ff, 0 0 38px rgba(0,245,255,0.55);
+  }
 }
 
 /* ══════════════════════════════════════════
