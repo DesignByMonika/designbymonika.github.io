@@ -26,7 +26,6 @@
   <div class="nav-links" id="nav-links">
     <a href="#projekty">Projekty</a>
     <a href="#skills">Narzędzia</a>
-    <a href="#certyfikaty">Szkolenia</a>
     <a href="#kontakt">Kontakt</a>
   </div>
 </nav>
@@ -72,11 +71,34 @@
 <!-- PROJEKTY -->
 <section id="projekty">
 <div class="section-bridge" aria-hidden="true">
-  <div class="bridge-line-left"></div>
-  <div class="bridge-cross">
-    <div class="bridge-cross-dot"></div>
-  </div>
-  <div class="bridge-line-right"></div>
+  <svg class="bridge-svg" viewBox="0 0 800 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="node-glow">
+        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- linia bazowa -->
+    <line class="bridge-base" x1="0" y1="30" x2="800" y2="30"/>
+
+    <!-- linie wireframe statyczne -->
+    <line class="bridge-base dim" x1="160" y1="30" x2="260" y2="10"/>
+    <line class="bridge-base dim" x1="260" y1="10" x2="400" y2="30"/>
+    <line class="bridge-base dim" x1="400" y1="30" x2="540" y2="50"/>
+    <line class="bridge-base dim" x1="540" y1="50" x2="640" y2="30"/>
+
+    <!-- ścieżka po której jedzie kropka -->
+    <path id="bridge-path" class="bridge-anim-path" d="M0,30 L160,30 L260,10 L400,30 L540,50 L640,30 L800,30"/>
+
+    <!-- jedna podróżująca kropka -->
+    <circle class="bridge-traveler" r="4" filter="url(#node-glow)">
+      <animateMotion dur="4s" repeatCount="indefinite" calcMode="linear">
+        <mpath href="#bridge-path"/>
+      </animateMotion>
+    </circle>
+
+  </svg>
 </div>
   <h2>Projekty</h2>
 
@@ -209,11 +231,34 @@
 <!-- SKILLS -->
 <section id="skills">
 <div class="section-bridge" aria-hidden="true">
-  <div class="bridge-line-left"></div>
-  <div class="bridge-cross">
-    <div class="bridge-cross-dot"></div>
-  </div>
-  <div class="bridge-line-right"></div>
+  <svg class="bridge-svg" viewBox="0 0 800 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="node-glow">
+        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- linia bazowa -->
+    <line class="bridge-base" x1="0" y1="30" x2="800" y2="30"/>
+
+    <!-- linie wireframe statyczne -->
+    <line class="bridge-base dim" x1="160" y1="30" x2="260" y2="10"/>
+    <line class="bridge-base dim" x1="260" y1="10" x2="400" y2="30"/>
+    <line class="bridge-base dim" x1="400" y1="30" x2="540" y2="50"/>
+    <line class="bridge-base dim" x1="540" y1="50" x2="640" y2="30"/>
+
+    <!-- ścieżka po której jedzie kropka -->
+    <path id="bridge-path" class="bridge-anim-path" d="M0,30 L160,30 L260,10 L400,30 L540,50 L640,30 L800,30"/>
+
+    <!-- jedna podróżująca kropka -->
+    <circle class="bridge-traveler" r="4" filter="url(#node-glow)">
+      <animateMotion dur="4s" repeatCount="indefinite" calcMode="linear">
+        <mpath href="#bridge-path"/>
+      </animateMotion>
+    </circle>
+
+  </svg>
 </div>
   <canvas class="blob-canvas"></canvas>
   <h2>Narzędzia</h2>
@@ -224,11 +269,13 @@
         <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/wordpress/wordpress-plain.svg" class="s-icon"> WordPress</li>
         <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" class="s-icon"> HTML5 / CSS3 (SCSS)</li>
         <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" class="s-icon"> JavaScript (ES6+)</li>
+        <!--
         <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" class="s-icon"> React</li>
         <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" class="s-icon" style="filter:invert(1)"> Next.js</li>
         <li><img src="https://cdn.worldvectorlogo.com/logos/gsap-greensock.svg" class="s-icon"> GSAP</li>
         <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/opengl/opengl-plain.svg" class="s-icon"> WebGL</li>
-        <li><img src="img/spline-app-icon-v2.webp" class="s-icon"> Spline / Three.js</li>
+        -->
+        <li><img src="img/threejs.png" class="s-icon">Three.js</li>
       </ul></div>
     </div>
     <div class="skill-card">
@@ -244,14 +291,15 @@
     <div class="skill-card">
       <div class="accordion-header"><h3>3D &amp; Video</h3></div>
       <div class="accordion-content"><ul>
-        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/blender/blender-original.svg" class="s-icon"> Blender</li>
         <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threedsmax/threedsmax-original.svg" class="s-icon"> 3DS Max</li>
-        <li><img src="img/SketchUp-logo.png" class="s-icon"> SketchUp</li>
-        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/unity/unity-original.svg" class="s-icon"> Unity</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/blender/blender-original.svg" class="s-icon"> Blender</li>
+       <!-- <li><img src="img/SketchUp-logo.png" class="s-icon"> SketchUp</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/unity/unity-original.svg" class="s-icon"> Unity</li>-->
         <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg" class="s-icon"> After Effects</li>
         <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg" class="s-icon"> Premiere Pro</li>
       </ul></div>
     </div>
+    <!--
     <div class="skill-card">
       <div class="accordion-header"><h3>Backend</h3></div>
       <div class="accordion-content"><ul>
@@ -268,6 +316,7 @@
         <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" class="s-icon" style="filter:invert(1)"> Git / GitHub</li>
       </ul></div>
     </div>
+  -->
   </div>
 </section>
   <!--
@@ -307,11 +356,34 @@ CERTYFIKATY
 <!-- KONTAKT -->
 <section id="kontakt" class="contact-section">
 <div class="section-bridge" aria-hidden="true">
-  <div class="bridge-line-left"></div>
-  <div class="bridge-cross">
-    <div class="bridge-cross-dot"></div>
-  </div>
-  <div class="bridge-line-right"></div>
+  <svg class="bridge-svg" viewBox="0 0 800 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="node-glow">
+        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- linia bazowa -->
+    <line class="bridge-base" x1="0" y1="30" x2="800" y2="30"/>
+
+    <!-- linie wireframe statyczne -->
+    <line class="bridge-base dim" x1="160" y1="30" x2="260" y2="10"/>
+    <line class="bridge-base dim" x1="260" y1="10" x2="400" y2="30"/>
+    <line class="bridge-base dim" x1="400" y1="30" x2="540" y2="50"/>
+    <line class="bridge-base dim" x1="540" y1="50" x2="640" y2="30"/>
+
+    <!-- ścieżka po której jedzie kropka -->
+    <path id="bridge-path" class="bridge-anim-path" d="M0,30 L160,30 L260,10 L400,30 L540,50 L640,30 L800,30"/>
+
+    <!-- jedna podróżująca kropka -->
+    <circle class="bridge-traveler" r="4" filter="url(#node-glow)">
+      <animateMotion dur="4s" repeatCount="indefinite" calcMode="linear">
+        <mpath href="#bridge-path"/>
+      </animateMotion>
+    </circle>
+
+  </svg>
 </div>
   <div class="contact-glow-1"></div>
   <div class="contact-glow-2"></div>
