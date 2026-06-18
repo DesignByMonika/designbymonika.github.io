@@ -4,440 +4,371 @@
 <meta charset="UTF-8" />
 <title>Portfolio Moniki</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="style.css" />
-<link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Michroma&display=swap" rel="stylesheet" />
 <meta property="og:title" content="Portfolio Moniki" />
 <meta property="og:description" content="Zapraszam do obejrzenia moich projektów designu i grafiki." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://portfolio.pixiart.pl/" />
 <meta property="og:image" content="https://portfolio.pixiart.pl/img/okladki/okladka_strona_glowna.jpg" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<nav>
-<div class="logo-portfolio">
-  <a href="#">Portfolio</a>
-</div>
-<div class="hamburger-menu" id="hamburger-btn">
-<div class="bar1"></div>
-<div class="bar2"></div>
-<div class="bar3"></div>
-</div>
-<div class="nav-links" id="nav-links">
-<a href="#o-mnie">O mnie</a>
-<a href="#projekty">Projekty</a>
-<a href="#skills">Narzędzia</a>
-<a href="#certyfikaty">Szkolenia</a>
-<a href="#kontakt">Kontakt</a>
-</div>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="scroll-progress"></div>
+
+<nav id="main-nav">
+  <div class="logo-portfolio"><a href="#">Portfolio</a></div>
+  <div class="hamburger-menu" id="hamburger-btn">
+    <div class="bar1"></div><div class="bar2"></div><div class="bar3"></div>
+  </div>
+  <div class="nav-links" id="nav-links">
+    <a href="#projekty">Projekty</a>
+    <a href="#skills">Narzędzia</a>
+    <a href="#certyfikaty">Szkolenia</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
 </nav>
+
+<!-- HERO -->
 <section class="hero">
-<canvas id="grid-canvas"></canvas>
-<div class="content">
-<h1>Frontend Developer<br />& Grafik</h1>
-<p>Łączę projektowanie wizualne z kodowaniem</p>
-<button onclick="document.querySelector('#kontakt').scrollIntoView({behavior:'smooth'})">Skontaktuj się</button>
-</div>
-</section>
-<section id="o-mnie">
-  <canvas class="blob-canvas"></canvas>
-  <h2>O mnie</h2>
-  <div class="o-mnie-container">
-<div class="o-mnie-container_left">
-    <div class="topo-wrapper">
-        <div class="topo-blob tb-1"></div>
-        <div class="topo-blob tb-2"></div>
-        <div class="topo-blob tb-3"></div>
-        <div class="topo-blob tb-4"></div>
-        <div class="topo-blob tb-5"></div>
-        <div class="topo-blob tb-6"></div>
-       <div class="topo-blob tb-7"></div>
-        <div class="topo-blob tb-8"></div>
+  <div class="hero-left-canvas">
+    <canvas id="blob-canvas"></canvas>
+
+    <!-- HINT — powiększony łuk 320×320, naprzemienne napisy przez JS -->
+    <div class="blob-hint" id="blob-hint">
+      <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 5C22 5 22 3 20 3C18 3 18 5 18 5L18 22L15.5 19.5C14.5 18.5 13 18.5 12.5 20C12 21.5 13 23 13.5 23.5L20.5 31.5C21.5 33 23.5 34.5 26.5 34.5C30.5 34.5 33.5 31.5 33.5 27.5L33.5 15.5C33.5 13.5 31.5 13.5 29.5 13.5L29.5 13.5C29.5 11.5 27.5 11.5 25.5 11.5L25.5 11.5C25.5 9.5 23.5 9.5 21.5 9.5L21.5 5Z" fill="rgba(0,245,255,0.88)" stroke="rgba(0,245,255,0.25)" stroke-width="0.5"/>
+      </svg>
+      <div class="blob-hint-pulse"></div>
     </div>
-</div>
-<div class="o-mnie-container_right">
-  <div class="skill-card about-card">
-      <p class="animate-me">Cześć, jestem <span>Monika</span>.</p>
-     <br>
 
-      <p class="scatter-text">Zajmuję się tworzeniem stron internetowych oraz projektowaniem graficznym. Lubię, gdy kod i design współpracują ze sobą, tworząc coś estetycznego i funkcjonalnego.</p>
+    <!-- ŁUK 2× WIĘKSZY — viewBox 320×320, promień 116 -->
+    <svg class="blob-hint-arc" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="blobArr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="rgba(0,245,255,0.7)"/>
+        </marker>
+      </defs>
+      <path d="M 160 44 A 116 116 0 0 1 272 188" fill="none" stroke="rgba(0,245,255,0.4)" stroke-width="1.2" stroke-dasharray="4 5" marker-end="url(#blobArr)"/>
+    </svg>
 
-      <br>
+    <!-- napis z id — JS będzie zmieniał treść naprzemiennie -->
+    <div class="blob-hint-label" id="blob-hint-label">pokręć mną</div>
 
-      <p class="scatter-text">Dążę do tego, by moje projekty nie były jedynie statycznym obrazem, lecz żywym narzędziem, które aktywnie reaguje na potrzeby użytkownika.</p>
-
-      <br>
   </div>
-</div>
+  <div class="hero-right-content">
+    <p class="hero-label">Monika</p>
+    <h1 data-text="Creative&#10;Technologist">Designer<br>Developer</h1>
+    <p class="hero-sub">Creative Design &amp; Frontend</p>
+    <div class="hero-omnie">
+      <p>Pasjonuję się projektowaniem graficznym, tworzeniem nowoczesnych stron internetowych i interaktywnych animacji. Łączę estetykę z funkcjonalnością — tam, gdzie kod spotyka design. Szukam pracy na cały lub niepełny etat, UoP. Praca zdalna, hybrydowa lub stacjonarna.</p>
+    </div>
+    <br>
   </div>
 </section>
+
+<!-- PROJEKTY -->
 <section id="projekty">
-<h2>Projekty</h2>
-<h3>Frontend & Web design</h3>
-<div class="projekty-grid">
-<div class="card" data-image="img/sushi okładka.png" data-title="Sashirō Sushi" data-description="Responsywna strona internetowa dla restauracji sushi „Sashirō Sushi”. Strona prezentuje ofertę kulinarną z menu z filtrem. Narzędzia: HTML, CSS, JavaScript, Figma" data-link="http://sushi.pixiart.pl/">
-<div class="card-visual"><img src="img/sushi okładka.png" alt="Sushi Master"></div>
-<div class="card-info"><p class="card-project-title">Sashirō Sushi</p></div>
-</div>
-<div class="card" data-image="img/metro club okładka.png" data-title="Metro Club" data-description="Responsywna strona internetowa dla klubu nocnego „Metro Club”. Zawiera interaktywne sekcje, takie jak „Online Vibes” oraz galerię zdjęć, utrzymane w futurystycznym, neonowym stylu inspirowanym kulturą klubową i cyberpunkiem. Narzędzia: HTML, CSS, JavaScript, Figma, Adobe Illustrator" data-link="https://metroclub.pixiart.pl">
-<div class="card-visual"><img src="img/metro club okładka.png" alt="Metro Club"></div>
-<div class="card-info"><p class="card-project-title">Metro Club</p></div>
-</div>
-<div class="card" data-image="img/leśna suszka okładka.png" data-title="Leśny Azyl" data-description="Responsywna strona internetowa promująca „Leśny Azyl”. Spokojne, zaciszne miejsce z relaksacyjnym, leśnym efektem audio. Narzędzia: HTML, CSS, JavaScript" data-link="https://lesnyazyl.pixiart.pl">
-<div class="card-visual"><img src="img/leśna suszka okładka.png" alt="Leśny Azyl"></div>
-<div class="card-info"><p class="card-project-title">Leśny Azyl</p></div>
-</div>
-<div class="card" data-image="img/urocze chwile okładka.png" data-title="Urocze Chwile" data-description="Responsywna strona internetowa dla firmy eventowej. Lekki, pastelowy design. Narzędzia: HTML, CSS, JavaScript, Figma" data-link="https://uroczechwile.pixiart.pl">
-<div class="card-visual"><img src="img/urocze chwile okładka.png" alt="Urocze Chwile"></div>
-<div class="card-info"><p class="card-project-title">Urocze Chwile</p></div>
-</div>
-<!--
-<div class="card soon" data-image="img/ilustracja_art.jpg" data-title="3D">
-<div class="card-visual">
-<div class="soon-overlay">Wkrótce...</div>
-</div>
-<div class="card-info"><p class="card-project-title">Wkrótce...</p></div>
-</div>
-<div class="card soon" data-image="img/ilustracja_art.jpg" data-title="3D">
-<div class="card-visual">
-<div class="soon-overlay">Wkrótce...</div>
-</div>
-<div class="card-info"><p class="card-project-title">Wkrótce...</p></div>
-</div>-->
-</div>
-<h3>Creative Coding</h3>
-<div class="projekty-grid">
-<div class="card" data-image="img/rolki okładka.png" data-title="ROLKI REWIZJA (R-77)" data-description="Webowy projekt artystyczny z interaktywnymi rolkami oraz efektami wizualnymi (flash, light), wyposażony w przyciski do przewijania i zoomu. Projekt stanowi dialog z artystą Józefem Robakowskim, twórcą dzieła „Rolki” (1970), reinterpretując jego koncept w środowisku cyfrowym. Narzędzia: HTML, CSS, JavaScript" data-link="https://rolki.pixiart.pl">
-<div class="card-visual"><img src="img/rolki okładka.png" alt="ROLKI REWIZJA (R-77)"></div>
-<div class="card-info"><p class="card-project-title">ROLKI REWIZJA (R-77)</p></div>
-</div>
-<div class="card" data-image="img/nova okładka.png" data-title="Nova" data-description="Webowy projekt artystyczny „Planetarna cisza”, który pozwala na przejęcie kontroli nad Novą. Umożliwia eksplorację poprzez zmianę kolorów oraz interakcję za pomocą gestów (przesuwanie i przewijanie). Narzędzia: HTML, CSS, JavaScript" data-link="https://nova.pixiart.pl">
-<div class="card-visual"><img src="img/nova okładka.png" alt="Nova"></div>
-<div class="card-info"><p class="card-project-title">Nova</p></div>
-</div>
-<!--
-<div class="card soon" data-image="img/ilustracja_art.jpg" data-title="3D">
-<div class="card-visual">
-<div class="soon-overlay">Wkrótce...</div>
-</div>
-<div class="card-info"><p class="card-project-title">Wkrótce...</p></div>-->
-</div>
-</div>
-<h3 id="web-design">Web design</h3>
-<div class="projekty-grid">
-<div class="card" data-image="img/stepone okładka.JPG" data-title="Stepone Branding" data-description="Projekt graficzny sklepu sportowego w estetyce dark mode, łączący głęboki granat z energetycznym pomarańczem oraz dynamiczną typografią. Koncepcja zakłada wykorzystanie AI w sekcji personalizacji produktu z dedykowanym panelem edycyjnym 3D. Narzędzia: Adobe Photoshop, Adobe Illustrator" data-link="stepone.html">
-<div class="card-visual"><img src="img/stepone okładka.JPG" alt="Stepone Branding"></div>
-<div class="card-info"><p class="card-project-title">Stepone Branding</p></div>
-</div>
-<div class="card" data-image="img/prawnik okładka.jpg" data-title="Kancelaria Prawna" data-description="Projekt graficzny strony-wizytówki kancelarii prawnej, utrzymany w klasycznej estetyce opartej na bieli, złocie i głębokim granacie. Projekt zakłada użycie efektu parallaxy. Narzędzia: Figma, Adobe Photoshop, Adobe Illustrator" data-link="prawnik.html">
-<div class="card-visual"><img src="img/prawnik okładka.jpg" alt="Prawnik"></div>
-<div class="card-info"><p class="card-project-title">Kancelaria Prawna</p></div>
-</div>
-<div class="card" data-image="img/BIOswift okładka.jpg" data-title="BIOswift" data-description="Projekt graficzny sklepu z ekologiczną żywnością oraz spersonalizowanego cateringu dietetycznego, utrzymany w świeżej, biało-zielonej estetyce. Projekt zakłada zintegrowany system wyboru planów posiłków oraz interaktywne menu z dynamicznymi kartami dań. Narzędzia: Figma, Adobe Photoshop, Adobe Illustrator" data-link="bioswift.html">
-<div class="card-visual"><img src="img/BIOswift okładka.jpg" alt="BIOswift"></div>
-<div class="card-info"><p class="card-project-title">BIOswift</p></div>
-</div>
-<!--
-<div class="card" data-image="img/okładka Arum.png" data-title="Aurum" data-description="Projekt strony restauracy - w trakcie przebudowy. Narzędzia: Figma" data-link="aurum.html">
-<div class="card-visual"><img src="img/okładka Arum.png" alt="aurum"></div>
-<div class="card-info"><p class="card-project-title">Aurum Restauracja</p></div>
-</div>-->
-<div class="card" data-image="img/walkMe okładka.jpg" data-title="WalkMeP" data-description="Projekt aplikacji mobilnej dedykowanej opiece nad zwierzętami, utrzymany w naturalnej palecie zieleni i beżu. Projekt zakłada system geolokalizacji GPS w czasie rzeczywistym oraz rozbudowany moduł rezerwacji spacerów zintegrowany z profilami opiekunów. Narzędzia: Adobe Illustrator" data-link="walkme.html">
-<div class="card-visual"><img src="img/walkMe okładka.jpg" alt="WalkMe"></div>
-<div class="card-info"><p class="card-project-title">WalkMeP</p></div>
-</div>
-<div class="card" data-image="img/eSWAP okładka.jpg" data-title="eSWAP" data-description="Projekt aplikacji mobilnej typu community marketplace, promującej ideę gospodarki obiegu zamkniętego poprzez wymianę towarów i usług. Charakteryzuje się zielono-pomarańczową paletą barw. Zakłada system wielostronnej wymiany przedmiotów. Narzędzia: Figma, Adobe Photoshop, Adobe Illustrator" data-link="eswap.html">
-<div class="card-visual"><img src="img/eSWAP okładka.jpg" alt="eSWAP"></div>
-<div class="card-info"><p class="card-project-title">eSWAP</p></div>
-</div>
-</div>
-<h3 id="grafika-projektowa">Grafika projektowa</h3>
-<div class="projekty-grid">
+  <div class="section-bridge" aria-hidden="true">
+    <div class="bridge-blob-glow"></div>
+    <div class="bridge-center">
+      <div class="bridge-line"></div>
+      <div class="bridge-dot-outer"><div class="bridge-dot-mid"><div class="bridge-dot-inner"></div></div></div>
+      <div class="bridge-line right"></div>
+    </div>
+  </div>
+  <h2>Projekty</h2>
 
-<div class="card" data-image="img/okladki/okladka_socialmedia.jpg" data-title="social media" data-description="Projekty postów na social media: Adobe Photoshop, Adobe Illustrator, Canva" data-link="socialmedia.html">
-<div class="card-visual"><img src="img/okladki/okladka_socialmedia.jpg" alt="social media"></div>
-<div class="card-info"><p class="card-project-title">Social media</p></div>
-</div>
+<!-- ── WEB DESIGN & FRONTEND ── -->
+  <h3 class="section-category">Web design &amp; Frontend</h3>
 
-<div class="card" data-image="img/okladki/loga_ikony_okladka.png" data-title="Loga i ikonografia" data-description="Projekty: loga i ikonografia. Narzędzia: Adobe Illustrator, Adobe InDesign" data-link="loga.html">
-<div class="card-visual"><img src="img/okladki/loga_ikony_okladka.png" alt="logo"></div>
-<div class="card-info"><p class="card-project-title">Loga i ikonografia</p></div>
-</div>
+  <h4 class="section-sub-label">UI Design + FRONTEND</h4>
+  <div class="projekty-grid">
+    <a class="card" data-index="01" href="http://sushi.pixiart.pl/" target="_blank" rel="noopener">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/sushi okładka.png" alt="Sashirō Sushi"></div>
+      <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">Sashirō Sushi</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="01" href="http://sushi.pixiart.pl/" target="_blank" rel="noopener">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/sushi okładka.png" alt="Sashirō Sushi"></div>
+      <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">Sashirō Sushi</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="01" href="http://sushi.pixiart.pl/" target="_blank" rel="noopener">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/sushi okładka.png" alt="Sashirō Sushi"></div>
+      <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">Sashirō Sushi</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="02" href="https://metroclub.pixiart.pl" target="_blank" rel="noopener">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/metro club okładka.png" alt="Metro Club"></div>
+      <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">Metro Club</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="03" href="https://lesnyazyl.pixiart.pl" target="_blank" rel="noopener">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/leśna suszka okładka.png" alt="Leśny Azyl"></div>
+      <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">Leśny Azyl</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="04" href="https://uroczechwile.pixiart.pl" target="_blank" rel="noopener">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/urocze chwile okładka.png" alt="Urocze Chwile"></div>
+      <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">Urocze Chwile</p><span class="card-arrow">↗</span></div>
+    </a>
+  </div>
 
-<div class="card" data-image="img/projektowanie_graficzne/identyfikacja_wizualna/identyfikacja_wizualana_oklatka.jpg" data-title="Identyfikacja wizualna" data-description="Projekty: Idenfikacja wizualna. Narzędzia: Adobe Illustrator, Adobe Photoshop" data-link="identyfikacjawizualna.html">
-<div class="card-visual"><img src="img/projektowanie_graficzne/identyfikacja_wizualna/identyfikacja_wizualana_oklatka.jpg" alt="Identyfikacja wizualna"></div>
-<div class="card-info"><p class="card-project-title">Identyfikacja wizualna</p></div>
-</div>
-
-<div class="card" data-image="img/projektowanie_graficzne/kompozycjeedytorskie/peter_jackson_okladka.jpg" data-title="Kompozycje edytorskie" data-description="Projektowanie układów treści i layoutów, łączących autorską ilustrację cyfrową ze składem tekstu i hierarchią informacji. Narzędzia: Adobe Photoshop, Adobe Illustrator" data-link="kompozycjeedytorskie.html">
-<div class="card-visual"><img src="img/projektowanie_graficzne/kompozycjeedytorskie/peter_jackson_okladka.jpg" alt="Kompozycje edytorskie"></div>
-<div class="card-info"><p class="card-project-title">Kompozycje edytorskie</p></div>
-</div>
-
-<div class="card" data-image="img/projektowanie_graficzne/merchandising/merchandising_1.jpg" data-title="Grafika na produktach" data-description="Tworzenie autorskich serii wzorów i motywów wizualnych dedykowanych na nośniki użytkowe, odzież oraz akcesoria lifestylowe.: Adobe Photoshop, Adobe Illustrator" data-link="merchandising.html">
-<div class="card-visual"><img src="img/projektowanie_graficzne/merchandising/merchandising_1.jpg" alt="Grafika na produktach"></div>
-<div class="card-info"><p class="card-project-title">Grafika na produktach</p></div>
-</div>
-
-<!--
-<div class="card soon" data-image="img/dtp_okladka.jpg" data-title="DTP i Druk">
-<div class="card-visual">
-<div class="soon-overlay">Wkrótce</div>
-</div>
-<div class="card-info"><p class="card-project-title">DTP</p></div>
-</div>
-</div>
-
-<h3 id="grafika-3d">Modelowanie i Wizualizacja 3D</h3>
-<div class="projekty-grid">-->
-<div class="card" data-image="img/3d/3d_1.jpg" data-title="Modelowanie 3D" data-description="Projekty koncepcyjne/sceny 3D. Narzędzia: Blender, 3ds Max, Unity" data-link="3d.html">
-<div class="card-visual"><img src="img/3d/3d_1.jpg" alt="Projekt 3D"></div>
-<div class="card-info"><p class="card-project-title">Projektowanie 3D</p></div>
-</div>
-<!--
-</div>
+  <h4 class="section-sub-label">UI Design - SKLEPY / STRONY WWW</h4>
+  <div class="projekty-grid">
+    <a class="card" data-index="01" href="bioswift.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/BIOswift okładka.jpg" alt="BIOswift"></div>
+      <div class="card-info"><span class="card-category">UI Design - SKLEP</span><p class="card-project-title">BIOswift</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="02" href="stepone.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/stepone okładka.JPG" alt="Stepone"></div>
+      <div class="card-info"><span class="card-category">UI Design - SKLEP</span><p class="card-project-title">Stepone Branding</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="03" href="prawnik.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/prawnik okładka.jpg" alt="Prawnik"></div>
+      <div class="card-info"><span class="card-category">UI Design - STRONA WWW</span><p class="card-project-title">Kancelaria Prawna</p><span class="card-arrow">↗</span></div>
+    </a>
+  </div>
 
 
-<h3 id="laboratorium-ai">Laboratorium AI</h3>
-<div class="projekty-grid">
+  <h4 class="section-sub-label">UI Design - APLIKACJE</h4>
+  <div class="projekty-grid">
+    <a class="card" data-index="04" href="walkme.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/walkMe okładka.jpg" alt="WalkMe"></div>
+      <div class="card-info"><span class="card-category">App Design</span><p class="card-project-title">WalkMeP</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="05" href="eswap.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/eSWAP okładka.jpg" alt="eSWAP"></div>
+      <div class="card-info"><span class="card-category">App Design</span><p class="card-project-title">eSWAP</p><span class="card-arrow">↗</span></div>
+    </a>
+  </div>
 
-<div class="card" data-image="img/lab/realizmmagiczny/realizm_ (1).jpg" data-title="Realizm Magiczny AI" data-description="Wygenerowano przy użyciu AI - Estetyka i nastrój. Test możliwości generowania złożonych kompozycji wizualnych. Kadry skupione na surrealizmie i świetle." data-link="socialmedia.html">
-<div class="card-visual"><img src="img/lab/realizmmagiczny/realizm_ (1).jpg" alt="Realizm Magiczny AI"></div>
-<div class="card-info"><p class="card-project-title">Realizm Magiczny AI</p></div>
-</div>
 
-<div class="card" data-image="img/lab/ilustracje/ilustracja_3.jpg" data-title="Ilustracje AI" data-description="Wygenerowano przy użyciu AI -  Formy wektorowe i płaskie. Próby uzyskania powtarzalnego stylu graficznego. Eksperymenty z czystością linii i paletą barw." data-link="loga.html">
-<div class="card-visual"><img src="img/lab/ilustracje/ilustracja_3.jpg" alt="Ilustracje AI"></div>
-<div class="card-info"><p class="card-project-title">Ilustracje AI</p></div>
-</div>
+  <!-- ── GRAFIKA PROJEKTOWA ── -->
+  <h3 id="grafika-projektowa" class="section-category">Grafika projektowa</h3>
 
-<div class="card" data-image="img/lab/tekstury/tekstura_1.jpg" data-title="Identyfikacja wizualna" data-description="Wygenerowano przy użyciu AI - Materiały i tła. Zbiór assetów wygenerowanych pod kątem użyteczności w projektach UI/UX. Testowanie powtarzalności i detalu." data-link="identyfikacjawizualna.html">
-<div class="card-visual"><img src="img/lab/tekstury/tekstura_1.jpg" alt="Identyfikacja wizualna"></div>
-<div class="card-info"><p class="card-project-title">Tekstury Web AI</p></div>
-</div>
-<h3>Illustration & Digital Art</h3>
-<div class="projekty-grid">
-<div class="card soon" data-image="img/malarstwo.jpg" data-title="">
-<div class="card-visual">
-<div class="soon-overlay">Wkrótce</div>
-</div>
-<div class="card-info"><p class="card-project-title">Illustration</p></div>
-</div>
-<div class="card soon" data-image="img/digitalpainting.jpg" data-title="">
-<div class="card-visual">
-<div class="soon-overlay">Wkrótce</div>
-</div>
-<div class="card-info"><p class="card-project-title">Digital painting</p></div>
-</div>
-<div class="card soon" data-image="img/ilustracja_art.jpg" data-title="3D">
-<div class="card-visual">
-<div class="soon-overlay">Wkrótce</div>
-</div>
-<div class="card-info"><p class="card-project-title">3D</p></div>
-</div>-->
-</div>
+  <h4 class="section-sub-label">Social Media</h4>
+  <div class="projekty-grid">
+    <a class="card" data-index="01" href="socialmedia.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/socialmedia/socialmedia_5.jpg" alt="Social media"></div>
+      <div class="card-info"><span class="card-category">Social Media</span><p class="card-project-title">Post firmowy - Squas</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="02" href="socialmedia.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/socialmedia/socialmedia_2.jpg" alt="Social media"></div>
+      <div class="card-info"><span class="card-category">Social Media</span><p class="card-project-title">Post firmowy - Zajęcia terapeutyczne</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="03" href="socialmedia.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/socialmedia/socialmedia_3.jpg" alt="Social media"></div>
+      <div class="card-info"><span class="card-category">Social Media</span><p class="card-project-title">Promocja produktu Cheesburger</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="01" href="socialmedia.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/socialmedia/socialmedia_4.jpg" alt="Social media"></div>
+      <div class="card-info"><span class="card-category">Social Media</span><p class="card-project-title">Oferta pracy</p><span class="card-arrow">↗</span></div>
+    </a>
+  </div>
 
-</div>
-<div class="topo-wrapper topo-right topo-alt">
-        <div class="topo-blob tb-1"></div>
-        <div class="topo-blob tb-2"></div>
-        <div class="topo-blob tb-3"></div>
-        <div class="topo-blob tb-4"></div>
-        <div class="topo-blob tb-5"></div>
-        <div class="topo-blob tb-6"></div>
-       <div class="topo-blob tb-7"></div>
-        <div class="topo-blob tb-8"></div>
-        </div>
+  <h4 class="section-sub-label">Komunikacja wizualna</h4>
+  <div class="projekty-grid">
+    <a class="card" data-index="02" href="identyfikacjawizualna.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/projektowanie_graficzne/identyfikacja_wizualna/identyfikacja_wizualana_oklatka.jpg" alt="Identyfikacja wizualna"></div>
+      <div class="card-info"><span class="card-category">Komunikacja wizualna</span><p class="card-project-title">Branding</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="01" href="loga.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/okladki/loga_ikony_okladka.png" alt="Loga i ikonografia"></div>
+      <div class="card-info"><span class="card-category">Komunikacja wizualna</span><p class="card-project-title">Loga i ikonografia</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="01" href="kompozycjeedytorskie.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/projektowanie_graficzne/kompozycjeedytorskie/peter_jackson_okladka.jpg" alt="Kompozycje edytorskie"></div>
+      <div class="card-info"><span class="card-category">Komunikacja wizualna</span><p class="card-project-title">Kompozycje edytorskie</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="01" href="merchandising.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/projektowanie_graficzne/merchandising/merchandising_1.jpg" alt="Grafika na produktach"></div>
+      <div class="card-info"><span class="card-category">Komunikacja wizualna</span><p class="card-project-title">Grafika na produktach</p><span class="card-arrow">↗</span></div>
+    </a>
+  </div>
+
+
+
+  <h4 class="section-sub-label">3D</h4>
+  <div class="projekty-grid">
+    <a class="card" data-index="01" href="scenalego.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/3d/3d_1.jpg" alt="LEGO scena"></div>
+      <div class="card-info"><span class="card-category">3D</span><p class="card-project-title">LEGO scena</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="02" href="koncepcjapostaci.html">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/lab/postac/okladka-postac.jpg" alt="Koncepcja postaci"></div>
+      <div class="card-info"><span class="card-category">3D</span><p class="card-project-title">Koncepcja postaci</p><span class="card-arrow">↗</span></div>
+    </a>
+  </div>
+
+  
+  <!-- ── CREATIVE CODING ── -->
+  <h3 class="section-category">Creative Coding</h3>
+
+  <h4 class="section-sub-label">Eksperymenty</h4>
+  <div class="projekty-grid">
+    <a class="card" data-index="01" href="https://rolki.pixiart.pl" target="_blank" rel="noopener">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/rolki okładka.png" alt="ROLKI REWIZJA"></div>
+      <div class="card-info"><span class="card-category">Creative Coding</span><p class="card-project-title">Rolki Rewizja (R-77)</p><span class="card-arrow">↗</span></div>
+    </a>
+    <a class="card" data-index="02" href="https://nova.pixiart.pl" target="_blank" rel="noopener">
+      <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/nova okładka.png" alt="Nova"></div>
+      <div class="card-info"><span class="card-category">Creative Coding</span><p class="card-project-title">Nova</p><span class="card-arrow">↗</span></div>
+    </a>
+  </div>
+
+  <div class="topo-wrapper topo-right topo-alt">
+    <div class="topo-blob tb-1"></div><div class="topo-blob tb-2"></div>
+    <div class="topo-blob tb-3"></div><div class="topo-blob tb-4"></div>
+    <div class="topo-blob tb-5"></div><div class="topo-blob tb-6"></div>
+    <div class="topo-blob tb-7"></div><div class="topo-blob tb-8"></div>
+  </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
+  <div class="section-bridge" aria-hidden="true">
+    <div class="bridge-blob-glow"></div>
+    <div class="bridge-center">
+      <div class="bridge-line"></div>
+      <div class="bridge-dot-outer"><div class="bridge-dot-mid"><div class="bridge-dot-inner"></div></div></div>
+      <div class="bridge-line right"></div>
+    </div>
+  </div>
   <canvas class="blob-canvas"></canvas>
   <h2>Narzędzia</h2>
   <div class="skills-grid">
-    
     <div class="skill-card">
       <div class="accordion-header"><h3>Frontend</h3></div>
-      <div class="accordion-content">
-        <ul>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/wordpress/wordpress-plain.svg" class="s-icon"> WordPress</li>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" class="s-icon"> HTML5 / CSS3 (SCSS)</li>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" class="s-icon"> JavaScript (ES6+)</li>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" class="s-icon"> React</li>
-          <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" class="s-icon" style="filter: invert(1);"> Next.js</li>
-          <li><img src="https://cdn.worldvectorlogo.com/logos/gsap-greensock.svg" class="s-icon"> GSAP (podstawy)</li>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/opengl/opengl-plain.svg" class="s-icon"> WebGL</li>
-          <li>
-  <svg viewBox="0 0 128 128" class="s-icon">
-    <path d="M16.219 15.762a1.129 1.129 0 00-1.076 1.399l24.394 98.742a1.129 1.129 0 001.879.544l73.386-70.59a1.129 1.129 0 00-.47-1.899L16.55 15.806a1.129 1.129 0 00-.331-.044zm1.584 2.754l94.024 27.07-70.566 67.877-23.458-94.947z" fill="#ffffff"></path>
-    <path d="M65.137 29.84a1.129 1.129 0 00-.807.315L27.654 65.46a1.129 1.129 0 00.471 1.898L76.984 81.44a1.129 1.129 0 001.409-1.355L66.21 30.698a1.129 1.129 0 00-1.073-.858zm-.651 3.3L75.734 78.73l-45.104-13L64.486 33.14z" fill="#ffffff"></path>
-    <path d="M46.914 47.313a1.129 1.129 0 00-1.076 1.399l6.054 24.531a1.129 1.129 0 001.88.543l18.222-17.563a1.129 1.129 0 00-.472-1.898l-24.277-6.968a1.129 1.129 0 00-.331-.044zm1.583 2.751l20.522 5.89L53.614 70.8l-5.117-20.736z" fill="#ffffff"></path>
-    <path d="M40.902 22.809a1.129 1.129 0 00-.807.316L21.873 40.687a1.129 1.129 0 00.472 1.898l24.273 6.969a1.129 1.129 0 001.408-1.356l-6.051-24.53a1.129 1.129 0 00-1.073-.86zm-.65 3.3l5.114 20.736-20.517-5.89 15.403-14.847zM89.453 36.793a1.129 1.129 0 00-.806.316L70.423 54.67a1.129 1.129 0 00.472 1.899l24.274 6.968a1.129 1.129 0 001.408-1.356l-6.05-24.53a1.129 1.129 0 00-1.074-.859zm-.65 3.3l5.114 20.737L73.4 54.94l15.403-14.846zM52.944 71.864a1.129 1.129 0 00-.74.315L33.982 89.742a1.129 1.129 0 00.472 1.898l24.278 6.968a1.129 1.129 0 001.407-1.355l-6.055-24.531a1.129 1.129 0 00-1.14-.858zm-.582 3.3l5.118 20.737-20.522-5.89 15.404-14.846z" fill="#ffffff"></path>
-  </svg> Three.js (Web 3D)
-</li>
-          <li><img src="img/spline-app-icon-v2.webp" class="s-icon"> Spline (Web 3d)</li>
-        </ul>
-      </div>
+      <div class="accordion-content"><ul>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/wordpress/wordpress-plain.svg" class="s-icon"> WordPress</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" class="s-icon"> HTML5 / CSS3 (SCSS)</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" class="s-icon"> JavaScript (ES6+)</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" class="s-icon"> React</li>
+        <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" class="s-icon" style="filter:invert(1)"> Next.js</li>
+        <li><img src="https://cdn.worldvectorlogo.com/logos/gsap-greensock.svg" class="s-icon"> GSAP</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/opengl/opengl-plain.svg" class="s-icon"> WebGL</li>
+        <li><img src="img/spline-app-icon-v2.webp" class="s-icon"> Spline / Three.js</li>
+      </ul></div>
     </div>
-
     <div class="skill-card">
-      <div class="accordion-header"><h3>Grafika & UI</h3></div>
-      <div class="accordion-content">
-        <ul>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/photoshop/photoshop-original.svg" class="s-icon"> Adobe Photoshop</li>
-          <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/illustrator/illustrator-original.svg" class="s-icon"> Adobe Illustrator</li>
-          <li><img src="https://cdn.worldvectorlogo.com/logos/adobe-indesign-cc-icon.svg" class="s-icon"> Adobe InDesign</li>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/canva/canva-original.svg" class="s-icon"> Canva</li>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg" class="s-icon"> Figma / Adobe XD</li>
-        </ul>
-      </div>
+      <div class="accordion-header"><h3>Grafika &amp; UI</h3></div>
+      <div class="accordion-content"><ul>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/photoshop/photoshop-original.svg" class="s-icon"> Adobe Photoshop</li>
+        <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/illustrator/illustrator-original.svg" class="s-icon"> Adobe Illustrator</li>
+        <li><img src="https://cdn.worldvectorlogo.com/logos/adobe-indesign-cc-icon.svg" class="s-icon"> Adobe InDesign</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/canva/canva-original.svg" class="s-icon"> Canva</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg" class="s-icon"> Figma / Adobe XD</li>
+      </ul></div>
     </div>
-
-   <div class="skill-card">
-      <div class="accordion-header"><h3>3D & Video</h3></div>
-      <div class="accordion-content">
-        <ul>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/blender/blender-original.svg" class="s-icon"> Blender</li>
-          <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threedsmax/threedsmax-original.svg" class="s-icon"> 3DS Max</li>
-          <li><img src="img/SketchUp-logo.png" class="s-icon"> SketchUp</li>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/unity/unity-original.svg" class="s-icon"> Unity</li>
-          <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg" class="s-icon"> After Effects</li>
-          <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg" class="s-icon"> Premiere Pro</li>
-        </ul>
-      </div>
+    <div class="skill-card">
+      <div class="accordion-header"><h3>3D &amp; Video</h3></div>
+      <div class="accordion-content"><ul>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/blender/blender-original.svg" class="s-icon"> Blender</li>
+        <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threedsmax/threedsmax-original.svg" class="s-icon"> 3DS Max</li>
+        <li><img src="img/SketchUp-logo.png" class="s-icon"> SketchUp</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/unity/unity-original.svg" class="s-icon"> Unity</li>
+        <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg" class="s-icon"> After Effects</li>
+        <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg" class="s-icon"> Premiere Pro</li>
+      </ul></div>
     </div>
-
     <div class="skill-card">
       <div class="accordion-header"><h3>Backend</h3></div>
-      <div class="accordion-content">
-        <ul>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" class="s-icon"> PHP</li>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" class="s-icon"> C++</li>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="s-icon"> Python</li>
-        </ul>
-      </div>
+      <div class="accordion-content"><ul>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" class="s-icon"> PHP</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" class="s-icon"> C++</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="s-icon"> Python</li>
+      </ul></div>
     </div>
-
-    <!--<div class="skill-card">
-      <div class="accordion-header"><h3>Analityka</h3></div>
-      <div class="accordion-content">
-        <ul>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" class="s-icon"> SQL (BigQuery)</li>
-          <li><img src="img/excel_16x1.svg" class="s-icon"> MS Excel</li>
-        </ul>
-      </div>
-    </div> -->
-
     <div class="skill-card">
       <div class="accordion-header"><h3>Inne</h3></div>
-      <div class="accordion-content">
-        <ul>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" class="s-icon"> MySQL (podstawy)</li>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" class="s-icon"> Visual Studio Code</li>
-          <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" class="s-icon" style="filter: invert(1);"> Git / GitHub</li>
-        </ul>
-      </div>
+      <div class="accordion-content"><ul>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" class="s-icon"> MySQL</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" class="s-icon"> Visual Studio Code</li>
+        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" class="s-icon" style="filter:invert(1)"> Git / GitHub</li>
+      </ul></div>
     </div>
-
   </div>
 </section>
+
+<!-- CERTYFIKATY -->
 <section id="certyfikaty">
-  <h2>Certyfikaty i Rozwój</h2>
-  <div class="cert-marquee">
-    <div class="cert-marquee-content">
-      <div class="cert-tile">
-        <div class="cert-info">
-          <img src="img/footer-logo.avif" alt="ISTQB" alt="ISTQB">
-          <span class="cert-name">ISTQB<br>Foundation</span>
-        </div>
-      </div>
-      
-<div class="cert-tile">
-<div class="cert-info">
-<div class="cert-text-logo">codersbrainers</div>
-<span class="cert-name">Fullstack<br>Bootcamp</span>
-</div>
-</div>
-
-    <div class="cert-tile">
-  <div class="cert-info">
-    <div class="cert-logos-row">
-       <img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" alt="Google">
-       <img src="img/sghlogo.png" alt="SGH" class="sgh-fix">
+  <div class="section-bridge" aria-hidden="true">
+    <div class="bridge-blob-glow"></div>
+    <div class="bridge-center">
+      <div class="bridge-line"></div>
+      <div class="bridge-dot-outer"><div class="bridge-dot-mid"><div class="bridge-dot-inner"></div></div></div>
+      <div class="bridge-line right"></div>
     </div>
-    <span class="cert-name">Umiejętności<br>Jutra: AI</span>
   </div>
-</div>
-
-      <div class="cert-tile">
-        <div class="cert-info">
-          <img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" alt="Google">
-          <span class="cert-name">Data<br>Analytics</span>
-        </div>
-      </div>
-    </div>
+  <h2>Certyfikaty i Rozwój</h2>
+  <h3 class="section-sub" style="margin-top:50px;">Wykształcenie</h3>
+  <div class="edu-grid">
+    <div class="edu-card c1"><span class="edu-num">01</span><span class="edu-icon">💻</span><p class="edu-school">WSB-NLU</p><p class="edu-degree">Informatyka<br>spec. Grafika komputerowa</p><p class="edu-desc">Programowanie i grafika 3D — techniczne zaplecze dla projektów interaktywnych.</p></div>
+    <div class="edu-card c1"><span class="edu-num">02</span><span class="edu-icon">🎓</span><p class="edu-school">AHE</p><p class="edu-degree">Grafika<br>spec. Grafika VR &amp; AR</p><p class="edu-desc">Projektowanie doświadczeń w środowiskach wirtualnych i rozszerzonej rzeczywistości.</p></div>
+    <div class="edu-card c1"><span class="edu-num">03</span><span class="edu-icon">🎨</span><p class="edu-school">URz</p><p class="edu-degree">Sztuki wizualne<br>spec. Komunikacja wizualna i multimedia</p><p class="edu-desc">Typografia, layout, animacja i produkcja multimedialna.</p></div>
+    <div class="edu-card c1"><span class="edu-num">04</span><span class="edu-icon">🏛️</span><p class="edu-school">PWr</p><p class="edu-degree">Architektura<br>spec. Architektura i urbanistyka</p><p class="edu-desc">Myślenie przestrzenne i projektowanie środowisk.</p></div>
+  </div>
+  <h3 class="section-sub">Certyfikaty i kursy</h3>
+  <div class="cert-grid-new">
+    <div class="cert-card-new"><div class="cert-icon-new"><img src="img/footer-logo.avif" alt="ISTQB"></div><div><p class="cert-name-new">ISTQB Foundation</p><p class="cert-org-new">Testowanie oprogramowania</p></div></div>
+    <div class="cert-card-new"><div class="cert-icon-new"><span class="cert-text-i">CB</span></div><div><p class="cert-name-new">Fullstack Bootcamp</p><p class="cert-org-new">Coders Brainers</p></div></div>
+    <div class="cert-card-new"><div class="cert-icon-new"><img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" alt="Google"></div><div><p class="cert-name-new">Umiejętności Jutra: AI</p><p class="cert-org-new">Google / SGH</p></div></div>
+    <div class="cert-card-new"><div class="cert-icon-new"><img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" alt="Google"></div><div><p class="cert-name-new">Data Analytics</p><p class="cert-org-new">Google</p></div></div>
   </div>
   <div class="topo-wrapper topo-left">
-                <div class="topo-blob tb-1"></div>
-        <div class="topo-blob tb-2"></div>
-        <div class="topo-blob tb-3"></div>
-        <div class="topo-blob tb-4"></div>
-        <div class="topo-blob tb-5"></div>
-        <div class="topo-blob tb-6"></div>
-       <div class="topo-blob tb-7"></div>
-        <div class="topo-blob tb-8"></div>
-        </div>
+    <div class="topo-blob tb-1"></div><div class="topo-blob tb-2"></div>
+    <div class="topo-blob tb-3"></div><div class="topo-blob tb-4"></div>
+    <div class="topo-blob tb-5"></div><div class="topo-blob tb-6"></div>
+    <div class="topo-blob tb-7"></div><div class="topo-blob tb-8"></div>
+  </div>
 </section>
 
-<section id="kontakt">
-<h2>Kontakt</h2>
-<p>Skontaktuj się ze mną</p>
-<p><span>monika@pixiart.pl</span></p>
+<!-- KONTAKT -->
+<section id="kontakt" class="contact-section">
+  <div class="section-bridge" aria-hidden="true">
+    <div class="bridge-blob-glow"></div>
+    <div class="bridge-center">
+      <div class="bridge-line"></div>
+      <div class="bridge-dot-outer"><div class="bridge-dot-mid"><div class="bridge-dot-inner"></div></div></div>
+      <div class="bridge-line right"></div>
+    </div>
+  </div>
+  <div class="contact-glow-1"></div>
+  <div class="contact-glow-2"></div>
+  <div class="contact-content">
+    <div class="contact-inner">
+      <div class="contact-status">Dostępna do pracy</div>
+      <h2 class="contact-heading">Skontaktuj się<em>ze mną</em></h2>
+      <div class="contact-divider">
+        <div class="contact-divider-line"></div>
+        <span class="contact-divider-coords">52.2297° N · 21.0122° E</span>
+        <div class="contact-divider-line"></div>
+      </div>
+      <a href="mailto:monika@pixiart.pl" class="contact-email"><span>monika@pixiart.pl</span></a>
+      <div class="contact-meta">
+        <div class="contact-meta-item"><span class="contact-meta-label">Forma</span><span class="contact-meta-value">UoP</span></div>
+        <div class="contact-meta-item"><span class="contact-meta-label">Wymiar</span><span class="contact-meta-value">Pełny / niepełny</span></div>
+        <div class="contact-meta-item"><span class="contact-meta-label">Tryb</span><span class="contact-meta-value">Zdalna · hybryda</span></div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- FOOTER -->
 <footer>
-&copy; 2026 Moje Portfolio 
+  <div class="footer-inner">
+    <div class="footer-copy">&copy; 2026 &nbsp;<span>Monika</span> &nbsp;·&nbsp; pixiart.pl</div>
+    <div class="footer-mark">Creative Technologist</div>
+    <div class="footer-meta">
+      <span class="footer-tag">Design</span>
+      <span class="footer-tag">Frontend</span>
+      <span class="footer-tag">3D</span>
+    </div>
+  </div>
 </footer>
-<div id="project-modal" class="modal">
-<div class="modal-content">
-<span class="close-btn">&times;</span>
-<div class="modal-container">
-<div class="modal-left-image">
-<img src="" alt="Obraz projektu" id="modal-image">
-</div>
-<div class="modal-right-text">
-<a href="#" target="_blank" class="modal-button" id="modal-link">Zobacz Projekt</a>
-<p id="modal-description"></p>
-</div>
-</div>
-</div>
-</div>
+
 <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
-<script>
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      const target = document.querySelector(window.location.hash);
-      if (target) {
-        setTimeout(() => {
-          const offset = 100; 
-          const bodyRect = document.body.getBoundingClientRect().top;
-          const elementRect = target.getBoundingClientRect().top;
-          const elementPosition = elementRect - bodyRect;
-          const offsetPosition = elementPosition - offset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }, 300); 
-      }
-    }
-  });
-</script>
 <script src="script.js"></script>
 </body>
 </html>
