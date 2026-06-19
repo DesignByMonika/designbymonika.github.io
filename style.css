@@ -596,7 +596,7 @@ footer:hover .footer-mark { color: rgba(0,245,255,0.08); }
 .reveal-block.active { opacity:1; transform:translateY(0); }
 section h2 { letter-spacing:20px; transition:letter-spacing 1s var(--ease),opacity .8s,transform .8s; opacity:0; transform:translateY(16px); }
 section h2.active { letter-spacing:4px; opacity:1; transform:translateY(0); }
-.blob-canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:2; pointer-events:none; opacity:0; }
+.blob-canvas { position:fixed; top:0; left:0; width:100%; height:77%; z-index:2; pointer-events:none; opacity:0; }
 #web-design,#grafika-projektowa,#o-mnie,#projekty,#skills,#kontakt,#certyfikaty { scroll-margin-top:100px; }
 
 /* ══ PODSTRONY ══ */
