@@ -398,7 +398,7 @@ section p { max-width: 800px; margin: 0 auto; line-height: 1.7; color: var(--mut
 .bridge-anim-path {
   fill: none; stroke: rgba(0,245,255,0.5); stroke-width: 1;
   stroke-dasharray: 900; stroke-dashoffset: 900;
-  animation: bridgePathDraw 4s linear infinite;
+  animation: bridgePathDraw 10s linear infinite;
 }
 @keyframes bridgePathDraw {
   0%        { stroke-dashoffset: 900; opacity: 0; }
@@ -409,13 +409,14 @@ section p { max-width: 800px; margin: 0 auto; line-height: 1.7; color: var(--mut
 .bridge-traveler {
   fill: #00f5ff;
   filter: drop-shadow(0 0 5px rgba(0,245,255,1)) drop-shadow(0 0 10px rgba(0,245,255,0.7));
-  animation: travelerFade 4s ease-in-out infinite;
+  animation: travelerFade 10s ease-in-out infinite; 
 }
+
 @keyframes travelerFade {
-  0%, 5%    { opacity: 0; }
-  15%       { opacity: 1; }
-  85%       { opacity: 1; }
-  95%, 100% { opacity: 0; }
+  0%   { opacity: 0; }
+  5%   { opacity: 1; } /* Szybko się pojawia na początku drogi */
+  90%  { opacity: 1; } /* Jest widoczna przez większość trasy */
+  100% { opacity: 0; } /* Płynnie znika na samym końcu (przy 800px) */
 }
 section h2 { margin-top: 0; padding-top: 10px; }
 
