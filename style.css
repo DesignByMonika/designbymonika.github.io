@@ -389,8 +389,11 @@ section p { max-width: 800px; margin: 0 auto; line-height: 1.7; color: var(--mut
 /* ══ BRIDGE ══ */
 .section-bridge {
   position: relative; width: 100%; height: 80px;
+
   display: flex; align-items: center; padding: 0 10%;
-  box-sizing: border-box; pointer-events: none; overflow: visible; margin-bottom: 10px;
+  box-sizing: border-box; pointer-events: none; overflow: visible; 
+  margin-top: 50px;
+  margin-bottom: 200px;
 }
 .bridge-svg { width: 100%; height: 60px; overflow: visible; }
 .bridge-base { stroke: rgba(0,245,255,0.1); stroke-width: 1; }
