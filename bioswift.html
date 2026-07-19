@@ -4,16 +4,25 @@
     <meta charset="UTF-8" />
     <title>Projekt BioSwift | Webdesign | Portfolio Monika</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" /> 
+    <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
 </head>
-<body class="project-background"> 
+<body class="project-background">
 
-    <nav>
+    <div id="scroll-progress"></div>
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+
+    <nav id="main-nav">
         <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
-        <div class="nav-links">
+        <div class="nav-links" id="nav-links">
             <a href="index.html#web-design">Powrót</a>
+        </div>
+            <div class="hamburger-menu" id="hamburger-btn">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
         </div>
     </nav>
 
@@ -37,7 +46,7 @@
                 <span class="segment-title">2. MENU</span>
                 <img src="img/bioswift 2.png" alt="Menu BioSwift" class="full-width-image">
             </div>
-            
+
             <div class="project-segment">
                 <span class="segment-title">3. SHOP</span>
                 <img src="img/bioswift 3.png" alt="Sklep BioSwift" class="full-width-image">
@@ -47,7 +56,7 @@
                 <span class="segment-title">4. SHOPPING CART</span>
                 <img src="img/bioswift 4.png" alt="Koszyk BioSwift" class="full-width-image">
             </div>
-            
+
         </div>
     </main>
 
@@ -63,5 +72,6 @@
   </div>
 </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>

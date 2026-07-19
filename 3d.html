@@ -8,12 +8,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="wspolne-inline.css" />
 </head>
 <body class="project-background">
-    <nav>
+
+    <div id="scroll-progress"></div>
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+    <nav id="main-nav">
         <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
-        <div class="nav-links">
+        <div class="nav-links" id="nav-links">
             <a href="index.html#grafika-projektowa">Powrót</a>
+        </div>
+            <div class="hamburger-menu" id="hamburger-btn">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
         </div>
     </nav>
 
@@ -24,9 +34,9 @@
                 <p>Modelowanie i Wizualizacja 3D</p>
             </header>
 
-<section class="project-segment" style="margin-top: 60px;">
+<section class="project-segment segment-margin-top-60">
     <div class="projekty-grid">
-        
+
         <a href="scenalego.html" class="card">
             <div class="card-visual">
                 <img src="img/3d/3d_1.jpg" alt="logo scena">
@@ -76,77 +86,12 @@
     </div>
 
     <div id="lightbox">
-        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
-        <button class="nav-btn prev-btn" onclick="changeImage(-1)">&#10094;</button>
+        <span class="close-lightbox">&times;</span>
+        <button class="lb-nav lb-prev">&#10094;</button>
         <img id="lightbox-img" src="">
-        <button class="nav-btn next-btn" onclick="changeImage(1)">&#10095;</button>
+        <button class="lb-nav lb-next">&#10095;</button>
     </div>
 
-    <script>
-        const modal = document.getElementById('project-modal');
-        const modalImage = document.getElementById('modal-image');
-        const modalLink = document.getElementById('modal-link');
-        const modalDesc = document.getElementById('modal-description');
-        const closeBtn = document.querySelector('.close-btn');
-
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', () => {
-                modalImage.src = card.getAttribute('data-image');
-                modalLink.href = card.getAttribute('data-link');
-                modalDesc.innerText = card.getAttribute('data-description');
-                modal.style.display = 'flex';
-            });
-        });
-
-        closeBtn.onclick = () => { modal.style.display = 'none'; };
-        window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
-
-        let currentGalleryImages = [];
-        let currentImageIndex = 0;
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-
-        document.querySelectorAll('.grid-kwadraty').forEach(gallery => {
-            const imgs = Array.from(gallery.querySelectorAll('.kwadrat img'));
-            gallery.querySelectorAll('.kwadrat').forEach((item, index) => {
-                item.addEventListener('click', () => {
-                    currentGalleryImages = imgs;
-                    openLightbox(index);
-                });
-            });
-        });
-
-        function openLightbox(index) {
-            currentImageIndex = index;
-            updateLightboxImage();
-            lightbox.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        function changeImage(step) {
-            currentImageIndex += step;
-            if (currentImageIndex >= currentGalleryImages.length) currentImageIndex = 0;
-            if (currentImageIndex < 0) currentImageIndex = currentGalleryImages.length - 1;
-            updateLightboxImage();
-        }
-
-        function updateLightboxImage() {
-            lightboxImg.src = currentGalleryImages[currentImageIndex].src;
-        }
-
-        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-        document.addEventListener('keydown', (e) => {
-            if (lightbox.style.display === 'flex') {
-                if (e.key === 'ArrowLeft') changeImage(-1);
-                if (e.key === 'ArrowRight') changeImage(1);
-                if (e.key === 'Escape') closeLightbox();
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

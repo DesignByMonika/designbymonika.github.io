@@ -4,29 +4,33 @@
     <meta charset="UTF-8" />
     <title>BioSwift | Księga znaków| Portfolio Monika</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" /> 
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="bioswift-ksiega-znaku.css" />
+    <link rel="stylesheet" href="wspolne-inline.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
-    <style>
-        .project-segment img {
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border-radius: 8px;
-        }
-    </style>
 </head>
-<body class="project-background"> 
+<body class="project-background">
 
-    <nav>
+    <div id="scroll-progress"></div>
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+
+    <nav id="main-nav">
         <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
-        <div class="nav-links">
-            <a href="loga.html">Powrót | <span style="color: #2d6bff; font-size: 16px;"> Loga i Ikonografia </span></a>
+        <div class="nav-links" id="nav-links">
+            <a href="loga.html">Powrót | <span class="link-powrot-highlight"> Loga i Ikonografia </span></a>
+        </div>
+            <div class="hamburger-menu" id="hamburger-btn">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
         </div>
     </nav>
 
-    <main class="project-detail-container-minimal" style="padding-top: 100px;">
+    <main class="project-detail-container-minimal container-padding-top-100">
         <div class="image-box-minimal">
-            
+
             <header class="project-segment">
                 <h1>BioSwift</h1>
                 <p>Kompletna Księga Znaku i Identyfikacja Wizualna</p>
@@ -34,7 +38,7 @@
 
             <div class="project-segment">
                 <span class="segment-title">PROJEKT IDENTYFIKACJI</span>
-                
+
                 <img src="img/icon/bioswift_icon/ksiega_znaku_bioswift_0.jpg" alt="BioSwift Page 0" class="full-width-image">
                 <img src="img/icon/bioswift_icon/ksiega_znaku_bioswift_1.jpg" alt="BioSwift Page 1" class="full-width-image">
                 <img src="img/icon/bioswift_icon/ksiega_znaku_bioswift_2.jpg" alt="BioSwift Page 2" class="full-width-image">
@@ -47,7 +51,7 @@
                 <img src="img/icon/bioswift_icon/ksiega_znaku_bioswift_9.jpg" alt="BioSwift Page 9" class="full-width-image">
                 <img src="img/icon/bioswift_icon/ksiega_znaku_bioswift_10.jpg" alt="BioSwift Page 10" class="full-width-image">
             </div>
-            
+
         </div>
     </main>
 
@@ -63,5 +67,6 @@
   </div>
 </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
