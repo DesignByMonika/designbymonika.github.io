@@ -59,7 +59,11 @@
   </div>
   <div class="hero-right-content">
     <p class="hero-label">Monika</p>
-    <h1 data-text="Creative&#10;Technologist">Designer<br>Developer</h1>
+    <h1>
+      Designer<br>Developer
+      <span class="glitch-layer gl-cyan" aria-hidden="true">Designer<br>Developer</span>
+      <span class="glitch-layer gl-red" aria-hidden="true">Designer<br>Developer</span>
+    </h1>
     <p class="hero-sub">Creative Design &amp; Frontend</p>
     <div class="hero-omnie">
       <p>Pasjonuję się projektowaniem graficznym, tworzeniem nowoczesnych stron internetowych i interaktywnych animacji. Łączę estetykę z funkcjonalnością — tam, gdzie kod spotyka design. Szukam pracy na cały lub niepełny etat, UoP. Praca zdalna, hybrydowa lub stacjonarna.</p>
@@ -70,64 +74,34 @@
 
 <!-- PROJEKTY -->
 <section id="projekty">
-<div class="section-bridge" aria-hidden="true">
-  <svg class="bridge-svg" viewBox="0 0 800 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <filter id="node-glow">
-        <feGaussianBlur stdDeviation="2.5" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-    </defs>
-
-    <!-- linia bazowa -->
-    <line class="bridge-base" x1="0" y1="30" x2="800" y2="30"/>
-
-    <!-- linie wireframe statyczne -->
-    <line class="bridge-base dim" x1="160" y1="30" x2="260" y2="10"/>
-    <line class="bridge-base dim" x1="260" y1="10" x2="400" y2="30"/>
-    <line class="bridge-base dim" x1="400" y1="30" x2="540" y2="50"/>
-    <line class="bridge-base dim" x1="540" y1="50" x2="640" y2="30"/>
-
-    <!-- ścieżka po której jedzie kropka -->
-    <path id="bridge-path" class="bridge-anim-path" d="M0,30 L160,30 L260,10 L400,30 L540,50 L640,30 L800,30"/>
-
-    <!-- jedna podróżująca kropka -->
-    <circle class="bridge-traveler" r="4" filter="url(#node-glow)">
-      <animateMotion dur="10s" repeatCount="indefinite" calcMode="linear">
-        <mpath href="#bridge-path"/>
-      </animateMotion>
-    </circle>
-
-  </svg>
-</div>
-  <h2>Projekty</h2>
+<h2>Projekty</h2>
 
 <!-- ── WEB DESIGN & FRONTEND ── -->
   <h3 class="section-category">Web design &amp; Frontend</h3>
 
   <h4 class="section-sub-label">UI Design + FRONTEND</h4>
   <div class="projekty-grid">
-    <a class="card" data-index="01" href="https://designbymonika.github.io/bizuteria/" target="_blank" rel="noopener">
+    <a class="card" data-index="01" href="https://monika-design-dev.github.io/bizuteria/" target="_blank" rel="noopener">
       <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/okladki/loga_bizuteria.png" alt="Sashirō Sushi"></div>
       <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">Sklep z biżuterią</p><span class="card-arrow">↗</span></div>
     </a>
-    <a class="card" data-index="01" href="https://designbymonika.github.io/sushi/" target="_blank" rel="noopener">
+    <a class="card" data-index="01" href="https://monika-design-dev.github.io/sushi/" target="_blank" rel="noopener">
       <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/sushi okładka.png" alt="Sashirō Sushi"></div>
       <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">Sashirō Sushi</p><span class="card-arrow">↗</span></div>
     </a>
-    <a class="card" data-index="01" href="https://designbymonika.github.io/pixiart/" target="_blank" rel="noopener">
+    <a class="card" data-index="01" href="" target="_blank" rel="noopener">
       <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/okladki/loga_pixiart.png" alt="Sashirō Sushi"></div>
       <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">PIXIART</p><span class="card-arrow">↗</span></div>
     </a>
-    <a class="card" data-index="02" href="https://designbymonika.github.io/metroclub/" target="_blank" rel="noopener">
+    <a class="card" data-index="02" href="https://monika-design-dev.github.io/metroclub/" target="_blank" rel="noopener">
       <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/metro club okładka.png" alt="Metro Club"></div>
       <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">Metro Club</p><span class="card-arrow">↗</span></div>
     </a>
-    <a class="card" data-index="03" href="https://designbymonika.github.io/lesny_azyl/" target="_blank" rel="noopener">
+    <a class="card" data-index="03" href="https://monika-design-dev.github.io/lesny_azyl/" target="_blank" rel="noopener">
       <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/leśna suszka okładka.png" alt="Leśny Azyl"></div>
       <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">Leśny Azyl</p><span class="card-arrow">↗</span></div>
     </a>
-    <a class="card" data-index="04" href="https://designbymonika.github.io/urocze_chwile/" target="_blank" rel="noopener">
+    <a class="card" data-index="04" href="https://monika-design-dev.github.io/urocze_chwile/" target="_blank" rel="noopener">
       <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/urocze chwile okładka.png" alt="Urocze Chwile"></div>
       <div class="card-info"><span class="card-category">Web design + FRONTEND</span><p class="card-project-title">Urocze Chwile</p><span class="card-arrow">↗</span></div>
     </a>
@@ -210,18 +184,18 @@
 
     <h4 class="section-sub-label">Gry</h4>
   <div class="projekty-grid">
-    <a class="card" data-index="01" href="https://designbymonika.github.io/gra_obca_planeta-/" target="_blank" rel="noopener">
+    <a class="card" data-index="01" href="https://monika-design-dev.github.io/gra_obca_planeta-/" target="_blank" rel="noopener">
       <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/okladki/okladka_gry.png" alt="GRA"></div>
       <div class="card-info"><span class="card-category">Gra w JavaScript</span><p class="card-project-title">Alien Planet Escape</p><span class="card-arrow">↗</span></div>
     </a>
 </div>
   <h4 class="section-sub-label">Eksperymenty</h4>
   <div class="projekty-grid">
-    <a class="card" data-index="01" href="https://designbymonika.github.io/rolki/" target="_blank" rel="noopener">
+    <a class="card" data-index="01" href="https://monika-design-dev.github.io/rolki/" target="_blank" rel="noopener">
       <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/rolki okładka.png" alt="ROLKI REWIZJA"></div>
       <div class="card-info"><span class="card-category">Creative Coding</span><p class="card-project-title">Rolki Rewizja (R-77)</p><span class="card-arrow">↗</span></div>
     </a>
-    <a class="card" data-index="02" href="https://designbymonika.github.io/nova/" target="_blank" rel="noopener">
+    <a class="card" data-index="02" href="https://monika-design-dev.github.io/nova/" target="_blank" rel="noopener">
       <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/nova okładka.png" alt="Nova"></div>
       <div class="card-info"><span class="card-category">Creative Coding</span><p class="card-project-title">Nova</p><span class="card-arrow">↗</span></div>
     </a>
@@ -237,35 +211,7 @@
 
 <!-- SKILLS -->
 <section id="skills">
-<div class="section-bridge" aria-hidden="true">
-  <svg class="bridge-svg" viewBox="0 0 800 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <filter id="node-glow">
-        <feGaussianBlur stdDeviation="2.5" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-    </defs>
-
-    <!-- linia bazowa -->
-    <line class="bridge-base" x1="0" y1="30" x2="800" y2="30"/>
-
-    <!-- linie wireframe statyczne -->
-    <line class="bridge-base dim" x1="160" y1="30" x2="260" y2="10"/>
-    <line class="bridge-base dim" x1="260" y1="10" x2="400" y2="30"/>
-    <line class="bridge-base dim" x1="400" y1="30" x2="540" y2="50"/>
-    <line class="bridge-base dim" x1="540" y1="50" x2="640" y2="30"/>
-
-    <!-- ścieżka po której jedzie kropka -->
-<path id="bridge-path" class="bridge-anim-path" d="M0,30 L160,30 L260,10 L400,30 L540,50 L640,30 L800,30"/>
-
-<circle class="bridge-traveler" r="4" filter="url(#node-glow)">
-  <animateMotion dur="10" repeatCount="indefinite" calcMode="linear">
-    <mpath href="#bridge-path"/> </animateMotion>
-</circle>
-
-  </svg>
-</div>
-  <canvas class="blob-canvas"></canvas>
+<canvas class="blob-canvas"></canvas>
   <h2>Narzędzia</h2>
   <div class="skills-grid">
     <div class="skill-card">
@@ -274,12 +220,6 @@
         <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/wordpress/wordpress-plain.svg" class="s-icon"> WordPress</li>
         <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" class="s-icon"> HTML5 / CSS3 (SCSS)</li>
         <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" class="s-icon"> JavaScript (ES6+)</li>
-        <!--
-        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" class="s-icon"> React</li>
-        <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" class="s-icon" style="filter:invert(1)"> Next.js</li>
-        <li><img src="https://cdn.worldvectorlogo.com/logos/gsap-greensock.svg" class="s-icon"> GSAP</li>
-        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/opengl/opengl-plain.svg" class="s-icon"> WebGL</li>
-        -->
         <li><img src="img/threejs.png" class="s-icon">Three.js</li>
       </ul></div>
     </div>
@@ -298,99 +238,16 @@
       <div class="accordion-content"><ul>
         <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threedsmax/threedsmax-original.svg" class="s-icon"> 3DS Max</li>
         <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/blender/blender-original.svg" class="s-icon"> Blender</li>
-       <!-- <li><img src="img/SketchUp-logo.png" class="s-icon"> SketchUp</li>
-        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/unity/unity-original.svg" class="s-icon"> Unity</li>-->
         <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg" class="s-icon"> After Effects</li>
         <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg" class="s-icon"> Premiere Pro</li>
       </ul></div>
     </div>
-    <!--
-    <div class="skill-card">
-      <div class="accordion-header"><h3>Backend</h3></div>
-      <div class="accordion-content"><ul>
-        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" class="s-icon"> PHP</li>
-        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" class="s-icon"> C++</li>
-        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="s-icon"> Python</li>
-      </ul></div>
-    </div>
-    <div class="skill-card">
-      <div class="accordion-header"><h3>Inne</h3></div>
-      <div class="accordion-content"><ul>
-        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" class="s-icon"> MySQL</li>
-        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" class="s-icon"> Visual Studio Code</li>
-        <li><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" class="s-icon" style="filter:invert(1)"> Git / GitHub</li>
-      </ul></div>
-    </div>
-  -->
   </div>
 </section>
-  <!--
-CERTYFIKATY
-<section id="certyfikaty">
-<div class="section-bridge" aria-hidden="true">
-  <div class="bridge-line-left"></div>
-  <div class="bridge-cross">
-    <div class="bridge-cross-dot"></div>
-  </div>
-  <div class="bridge-line-right"></div>
- </div>
-  <h2>Certyfikaty i Rozwój</h2>
 
-  <h3 class="section-sub" style="margin-top:50px;">Wykształcenie</h3>
-  <div class="edu-grid">
-    <div class="edu-card c1"><span class="edu-num">01</span><span class="edu-icon">💻</span><p class="edu-school">WSB-NLU</p><p class="edu-degree">Informatyka<br>spec. Grafika komputerowa</p><p class="edu-desc">Programowanie i grafika 3D — techniczne zaplecze dla projektów interaktywnych.</p></div>
-    <div class="edu-card c1"><span class="edu-num">02</span><span class="edu-icon">🎓</span><p class="edu-school">AHE</p><p class="edu-degree">Grafika<br>spec. Grafika VR &amp; AR</p><p class="edu-desc">Projektowanie doświadczeń w środowiskach wirtualnych i rozszerzonej rzeczywistości.</p></div>
-    <div class="edu-card c1"><span class="edu-num">03</span><span class="edu-icon">🎨</span><p class="edu-school">URz</p><p class="edu-degree">Sztuki wizualne<br>spec. Komunikacja wizualna i multimedia</p><p class="edu-desc">Typografia, layout, animacja i produkcja multimedialna.</p></div>
-    <div class="edu-card c1"><span class="edu-num">04</span><span class="edu-icon">🏛️</span><p class="edu-school">PWr</p><p class="edu-degree">Architektura<br>spec. Architektura i urbanistyka</p><p class="edu-desc">Myślenie przestrzenne i projektowanie środowisk.</p></div>
-  </div> 
-  <h3 class="section-sub">Certyfikaty i kursy</h3>
-  <div class="cert-grid-new">
-    <div class="cert-card-new"><div class="cert-icon-new"><img src="img/footer-logo.avif" alt="ISTQB"></div><div><p class="cert-name-new">ISTQB Foundation</p><p class="cert-org-new">Testowanie oprogramowania</p></div></div>
-    <div class="cert-card-new"><div class="cert-icon-new"><span class="cert-text-i">CB</span></div><div><p class="cert-name-new">Fullstack Bootcamp</p><p class="cert-org-new">Coders Brainers</p></div></div>
-    <div class="cert-card-new"><div class="cert-icon-new"><img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" alt="Google"></div><div><p class="cert-name-new">Umiejętności Jutra: AI</p><p class="cert-org-new">Google / SGH</p></div></div>
-    <div class="cert-card-new"><div class="cert-icon-new"><img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" alt="Google"></div><div><p class="cert-name-new">Data Analytics</p><p class="cert-org-new">Google</p></div></div>
-  </div>
-  <div class="topo-wrapper topo-left">
-    <div class="topo-blob tb-1"></div><div class="topo-blob tb-2"></div>
-    <div class="topo-blob tb-3"></div><div class="topo-blob tb-4"></div>
-    <div class="topo-blob tb-5"></div><div class="topo-blob tb-6"></div>
-    <div class="topo-blob tb-7"></div><div class="topo-blob tb-8"></div>
-  </div>
-</section>
--->
 <!-- KONTAKT -->
 <section id="kontakt" class="contact-section">
-<div class="section-bridge" aria-hidden="true">
-  <svg class="bridge-svg" viewBox="0 0 800 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <filter id="node-glow">
-        <feGaussianBlur stdDeviation="2.5" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-    </defs>
-
-    <!-- linia bazowa -->
-    <line class="bridge-base" x1="0" y1="30" x2="800" y2="30"/>
-
-    <!-- linie wireframe statyczne -->
-    <line class="bridge-base dim" x1="160" y1="30" x2="260" y2="10"/>
-    <line class="bridge-base dim" x1="260" y1="10" x2="400" y2="30"/>
-    <line class="bridge-base dim" x1="400" y1="30" x2="540" y2="50"/>
-    <line class="bridge-base dim" x1="540" y1="50" x2="640" y2="30"/>
-
-    <!-- ścieżka po której jedzie kropka -->
-    <path id="bridge-path" class="bridge-anim-path" d="M0,30 L160,30 L260,10 L400,30 L540,50 L640,30 L800,30"/>
-
-    <!-- jedna podróżująca kropka -->
-    <circle class="bridge-traveler" r="4" filter="url(#node-glow)">
-      <animateMotion dur="10s" repeatCount="indefinite" calcMode="linear">
-        <mpath href="#bridge-path"/>
-      </animateMotion>
-    </circle>
-
-  </svg>
-</div>
-  <div class="contact-glow-1"></div>
+<div class="contact-glow-1"></div>
   <div class="contact-glow-2"></div>
   <div class="contact-content">
     <div class="contact-inner">
@@ -400,11 +257,11 @@ CERTYFIKATY
         <div class="contact-divider-line"></div>
         <div class="contact-divider-line"></div>
       </div>
-      <a href="mailto:designbymonika@adresik.net" class="contact-email"><span>designbymonika@adresik.net</span></a>
+      <a href="mailto:monikadesigndev@intmail.pl" class="contact-email"><span>monikadesigndev@intmail.pl</span></a>
       <div class="contact-meta">
         <div class="contact-meta-item"><span class="contact-meta-label">Forma</span><span class="contact-meta-value">UoP</span></div>
-        <div class="contact-meta-item"><span class="contact-meta-label">Wymiar</span><span class="contact-meta-value">Pełny / niepełny</span></div>
-        <div class="contact-meta-item"><span class="contact-meta-label">Tryb</span><span class="contact-meta-value">Zdalna · hybryda</span></div>
+        <div class="contact-meta-item"><span class="contact-meta-label">Tryb</span><span class="contact-meta-value">· zdalna <br> · hybryda <br> · stacjonarny</span></div>
+        <div class="contact-meta-item"><span class="contact-meta-label">Wymiar</span><span class="contact-meta-value">Pełny / niepełny</span></div>      
       </div>
     </div>
   </div>
@@ -413,7 +270,7 @@ CERTYFIKATY
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-copy">&copy; 2026 &nbsp;<span>designbymonika.github.io</span> &nbsp;·&nbsp;designbymonika@adresik.net</div>
+    <div class="footer-copy">&copy; 2026 &nbsp;<span>monika-design-dev.github.io</span> &nbsp;·&nbsp;monikadesigndev@intmail.pl</div>
     <div class="footer-mark">Creative Technologist</div>
     <div class="footer-meta">
       <span class="footer-tag">Design</span>

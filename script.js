@@ -154,7 +154,7 @@ if (canvasBlob && typeof THREE !== 'undefined') {
   blobGroup = new THREE.Group();
   blobGroup.add(new THREE.Mesh(geometryBlob, blobSolidMat));
   blobGroup.add(new THREE.Mesh(geometryBlob, blobWireMat));
-  const bs = window.innerWidth < 900 ? 0.4 : 0.55;
+  const bs = window.innerWidth < 900 ? 0.85 : 0.55;
   blobGroup.scale.set(bs, bs, bs);
   sceneBlob.add(blobGroup);
   sceneBlob.add(new THREE.AmbientLight(0xffffff, 0.2));
@@ -167,6 +167,7 @@ if (canvasBlob && typeof THREE !== 'undefined') {
 
   /* ── KURSOR grab na canvasie ── */
   canvasBlob.style.cursor = 'grab';
+  canvasBlob.style.touchAction = 'none';
 
   canvasBlob.addEventListener('mouseenter', () => {
     if (cursor) cursor.style.display = 'none';
@@ -179,25 +180,29 @@ if (canvasBlob && typeof THREE !== 'undefined') {
   });
 
   /* ── KLIK — zmiana koloru + deformacja ── */
-  canvasBlob.addEventListener('click', () => {
+  function triggerBlobClick() {
     currentBlobColorIndex = (currentBlobColorIndex + 1) % blobColors.length;
     const nc = new THREE.Color(blobColors[currentBlobColorIndex]);
     if (typeof gsap !== 'undefined') {
       gsap.to(blobSolidMat.uniforms.uColor.value, { r: nc.r, g: nc.g, b: nc.b, duration: 0.8 });
       gsap.to(clickNoiseFactor, { value: 2.5, duration: 0.2, ease: 'power2.out',
         onComplete: () => gsap.to(clickNoiseFactor, { value: 0, duration: 2, ease: 'power2.out' }) });
-      const cs = window.innerWidth < 900 ? 0.4 : 0.55;
+      const cs = window.innerWidth < 900 ? 0.85 : 0.55;
       gsap.to(blobGroup.scale, { x: cs * 1.2, y: cs * 1.2, z: cs * 1.2, duration: 0.15, yoyo: true, repeat: 1, ease: 'power2.out' });
     }
-  });
+  }
+  canvasBlob.addEventListener('click', triggerBlobClick);
 
-  /* ── DRAG TO SPIN ── */
+  /* ── DRAG TO SPIN — mysz ── */
   let isDragging = false;
   let dragLastX = 0, dragLastY = 0;
   let dragVelX = 0, dragVelY = 0;
+  let dragMoved = false;
+  const DRAG_THRESHOLD = 4;
 
   canvasBlob.addEventListener('mousedown', e => {
     isDragging = true;
+    dragMoved = false;
     dragLastX = e.clientX;
     dragLastY = e.clientY;
     dragVelX = 0;
@@ -209,6 +214,7 @@ if (canvasBlob && typeof THREE !== 'undefined') {
     if (!isDragging) return;
     dragVelX = e.clientX - dragLastX;
     dragVelY = e.clientY - dragLastY;
+    if (Math.abs(dragVelX) > DRAG_THRESHOLD || Math.abs(dragVelY) > DRAG_THRESHOLD) dragMoved = true;
     blobGroup.rotation.y += dragVelX * 0.008;
     blobGroup.rotation.x += dragVelY * 0.008;
     dragLastX = e.clientX;
@@ -218,6 +224,34 @@ if (canvasBlob && typeof THREE !== 'undefined') {
   document.addEventListener('mouseup', () => {
     isDragging = false;
     canvasBlob.style.cursor = 'grab';
+  });
+
+  /* ── DRAG TO SPIN — dotyk (telefon / tablet) ── */
+  canvasBlob.addEventListener('touchstart', e => {
+    if (!e.touches || !e.touches.length) return;
+    isDragging = true;
+    dragMoved = false;
+    dragLastX = e.touches[0].clientX;
+    dragLastY = e.touches[0].clientY;
+    dragVelX = 0;
+    dragVelY = 0;
+  }, { passive: true });
+
+  canvasBlob.addEventListener('touchmove', e => {
+    if (!isDragging || !e.touches || !e.touches.length) return;
+    const t = e.touches[0];
+    dragVelX = t.clientX - dragLastX;
+    dragVelY = t.clientY - dragLastY;
+    if (Math.abs(dragVelX) > DRAG_THRESHOLD || Math.abs(dragVelY) > DRAG_THRESHOLD) dragMoved = true;
+    blobGroup.rotation.y += dragVelX * 0.008;
+    blobGroup.rotation.x += dragVelY * 0.008;
+    dragLastX = t.clientX;
+    dragLastY = t.clientY;
+  }, { passive: true });
+
+  canvasBlob.addEventListener('touchend', () => {
+    isDragging = false;
+    if (!dragMoved) triggerBlobClick();
   });
 
   /* ── UKRYJ HINT po pierwszej interakcji ── */
@@ -234,6 +268,7 @@ if (canvasBlob && typeof THREE !== 'undefined') {
   if (blobHintEl) {
     canvasBlob.addEventListener('mousedown', hideHint, { once: true });
     canvasBlob.addEventListener('click',     hideHint, { once: true });
+    canvasBlob.addEventListener('touchstart', hideHint, { once: true, passive: true });
   }
 
   /* ── NAPRZEMIENNE NAPISY: pokręć mną / kliknij ── */
@@ -297,7 +332,7 @@ if (canvasBlob && typeof THREE !== 'undefined') {
     cameraBlob.aspect = w2 / h2;
     cameraBlob.updateProjectionMatrix();
     rendererBlob.setSize(w2, h2);
-    const s = window.innerWidth < 900 ? 0.4 : 0.55;
+    const s = window.innerWidth < 900 ? 0.85 : 0.55;
     blobGroup.scale.set(s, s, s);
   });
 }
