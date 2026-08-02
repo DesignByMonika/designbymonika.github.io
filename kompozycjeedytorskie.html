@@ -9,6 +9,10 @@
 </head>
 <body class="project-background slider-has-header">
 
+    <div id="scroll-progress"></div>
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+
     <nav>
         <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
         <div class="nav-links">
@@ -22,19 +26,32 @@
     </header>
 
     <main class="masonry-container" id="gallery-container">
+        <div class="galeria-item"
+             data-full="img/projektowanie_graficzne/kompozycjeedytorskie/kompozycjeedytorskie_1.jpg"
+             data-title="Peter Jackson"
+             data-desc="Ulotka/Broszura">
+            <img src="img/projektowanie_graficzne/kompozycjeedytorskie/kompozycjeedytorskie_1.jpg" loading="lazy" alt="Peter Jackson">
+        </div>
+        <div class="galeria-item"
+             data-full="img/projektowanie_graficzne/kompozycjeedytorskie/kompozycjeedytorskie_2.jpg"
+             data-title="TOOL"
+             data-desc="Projekt płyty">
+            <img src="img/projektowanie_graficzne/kompozycjeedytorskie/kompozycjeedytorskie_2.jpg" loading="lazy" alt="TOOL">
+        </div>
     </main>
 
     <div id="slider-modal">
         <nav class="lightbox-nav">
             <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
             <div class="nav-links">
-                <a href="javascript:void(0);" class="close-slider">Powrót | Kompozycje edytorskie</a>
+                <a href="javascript:void(0);" class="close-lightbox">Powrót | Kompozycje edytorskie</a>
             </div>
         </nav>
         <div class="lightbox-header">
             <h1>Projektowanie graficzne</h1>
             <p>Kompozycje edytorskie</p>
         </div>
+        <div class="lightbox-caption" id="slider-caption"></div>
         <button class="lb-nav" id="prev-btn">&#10094;</button>
         <div class="slider-main">
             <div class="slider-content">
@@ -58,27 +75,59 @@
 </footer>
 
     <script>
-        const container = document.getElementById('gallery-container');
-        const liczbaIlustracji = 2; 
-        for (let i = 1; i <= liczbaIlustracji; i++) {
-            const item = document.createElement('div');
-            item.className = 'galeria-item';
-            const imgPath = `img/projektowanie_graficzne/kompozycjeedytorskie/kompozycjeedytorskie_${i}.jpg`;
-            item.setAttribute('data-full', imgPath);
-            item.innerHTML = `<img src="${imgPath}" loading="lazy" alt="Kompozycja ${i}">`;
-            container.appendChild(item);
+        /* ══ KURSOR — kółko powiększające się na hover (jak na stronie głównej) ══ */
+        const cursor     = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursor-ring');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+
+        if (cursor) {
+            document.addEventListener('mousemove', e => {
+                mx = e.clientX; my = e.clientY;
+                cursor.style.left = mx + 'px';
+                cursor.style.top  = my + 'px';
+            });
+
+            (function animCursor() {
+                rx += (mx - rx) * 0.12;
+                ry += (my - ry) * 0.12;
+                if (cursorRing) {
+                    cursorRing.style.left = rx + 'px';
+                    cursorRing.style.top  = ry + 'px';
+                }
+                requestAnimationFrame(animCursor);
+            })();
+
+            document.querySelectorAll('a, button, .galeria-item, .nav-btn, .close-slider, .close-lightbox').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+            });
         }
 
+        /* ══ SCROLL PROGRESS ══ */
+        const scrollBar = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            if (scrollBar) {
+                const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+                scrollBar.style.width = pct + '%';
+            }
+        });
+
+        /* ══ SLIDER / LIGHTBOX ══ */
         const modal = document.getElementById('slider-modal');
         const sliderImg = document.getElementById('slider-img');
         const sliderThumbs = document.getElementById('slider-thumbs');
-        const closeBtn = document.querySelector('.close-slider');
+        const sliderCaption = document.getElementById('slider-caption');
+        const closeBtn = document.querySelector('.close-lightbox');
         let currentIndex = 0;
         let images = [];
+        let titles = [];
+        let descs = [];
 
         window.onload = () => {
             const items = document.querySelectorAll('.galeria-item');
             images = Array.from(items).map(item => item.getAttribute('data-full'));
+            titles = Array.from(items).map(item => item.getAttribute('data-title') || '');
+            descs  = Array.from(items).map(item => item.getAttribute('data-desc') || '');
 
             buildThumbs();
 
@@ -110,6 +159,13 @@
         function showImage() { 
             if (images[currentIndex]) {
                 sliderImg.src = images[currentIndex]; 
+            }
+            if (sliderCaption) {
+                const title = titles[currentIndex] || '';
+                const desc  = descs[currentIndex] || '';
+                sliderCaption.innerHTML = title
+                    ? `<span class="lb-caption-title">${title}</span>${desc ? `<span class="lb-caption-desc">${desc}</span>` : ''}`
+                    : '';
             }
             if (sliderThumbs) {
                 sliderThumbs.querySelectorAll('.slider-thumb').forEach((t, i) => {

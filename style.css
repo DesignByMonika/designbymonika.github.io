@@ -597,15 +597,27 @@ section h2.active { letter-spacing:4px; opacity:1; transform:translateY(0); }
   background: rgba(0,0,0,0.97); backdrop-filter: blur(14px);
   justify-content: center; align-items: center;
 }
-.slider-content { position: relative; width: 90%; height: 85%; display: flex; justify-content: center; align-items: center; }
-.slider-content img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: var(--r-md); }
+
+/* ══ Stała szerokość/wysokość dużego zdjęcia w podglądzie — ta sama na każdej podstronie ══ */
+.slider-content {
+  position: relative;
+  width: 640px;
+  max-width: 70vw;
+  height: 52vh;
+  display: flex; justify-content: center; align-items: center;
+}
+.slider-content img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  border-radius: var(--r-md);
+}
 
 /* ══ SLIDER MAIN (zdjęcie + miniaturki w kolumnie) ══ */
 .slider-main {
   display: flex; flex-direction: column; align-items: center;
   gap: 16px; z-index: 10001; width: 90%; height: 85%;
 }
-.slider-main .slider-content { width: 100%; height: auto; flex: 1; min-height: 0; }
+.slider-main .slider-content { width: 640px; max-width: 70vw; height: 52vh; flex: none; }
 .slider-thumbs {
   display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; flex-shrink: 0;
 }
@@ -634,13 +646,14 @@ section h2.active { letter-spacing:4px; opacity:1; transform:translateY(0); }
   gap: 16px; padding-top: 210px; box-sizing: border-box;
 }
 .slider-has-header .slider-main { width: auto; height: auto; }
-.slider-has-header .slider-content { width: auto; height: auto; }
-.slider-has-header .slider-content img { max-height: 52vh; max-width: 70vw; width: auto; }
+.slider-has-header .slider-content { width: 640px; max-width: 70vw; height: 52vh; }
+.slider-has-header .slider-content img { width: 100%; height: 100%; object-fit: contain; }
 .slider-has-header .lb-nav { flex-shrink: 0; }
 
 @media (max-width:768px) {
   .slider-has-header #slider-modal { padding-top: 172px; gap: 6px; }
-  .slider-has-header .slider-content img { max-height: 40vh; max-width: 78vw; }
+  .slider-has-header .slider-content { width: 78vw; height: 40vh; }
+  .slider-has-header .slider-content img { width: 100%; height: 100%; }
 }
 .nav-btn {
   position: fixed; top: 50%; transform: translateY(-50%);
@@ -663,18 +676,21 @@ section h2.active { letter-spacing:4px; opacity:1; transform:translateY(0); }
   gap: 16px; padding-top: 210px; box-sizing: border-box;
 }
 #lightbox-img {
-  width: 640px; max-width: 70vw; height: auto;
-  max-height: 52vh;
+  width: 640px; max-width: 70vw;
+  height: 52vh;
   object-fit: contain; border-radius: var(--r-md);
 }
 
 /* Pasek Portfolio / Powrót w lightboxie — dokładnie ten sam styl co #main-nav */
 .lightbox-nav { z-index: 10002; }
 
-/* Nagłówek kategorii — styl jak .page-header */
+/* Nagłówek kategorii — wyrównany do lewej i ograniczony do szerokości strony,
+   tak samo jak .page-header na podstronach projektów (np. BioSwift) */
 .lightbox-header {
   position: fixed; top: 100px; left: 50%; transform: translateX(-50%);
-  z-index: 10001; pointer-events: none; text-align: center;
+  z-index: 10001; pointer-events: none; text-align: left;
+  width: 90%; max-width: 1100px; box-sizing: border-box;
+  padding-left: 10%; /* ← dodane */
 }
 .lightbox-header h1 {
   font-family: var(--font-head); font-size: clamp(1.2rem,3vw,2rem);
@@ -686,10 +702,14 @@ section h2.active { letter-spacing:4px; opacity:1; transform:translateY(0); }
   text-transform: uppercase; color: var(--cyan); margin: 0;
 }
 
+/* Tytuł projektu w lightboxie — wyrównany do lewej + linia oddzielająca,
+   tak jak sekcja projektowa (.project-segment) na stronie BioSwift */
 .lightbox-caption {
   position: fixed; top: 190px; left: 50%; transform: translateX(-50%);
-  text-align: center; pointer-events: none; z-index: 10001; max-width: 80%;
-  display: flex; flex-direction: column; gap: 6px;
+  text-align: left; pointer-events: none; z-index: 10001;
+  width: 90%; max-width: 1100px; box-sizing: border-box;
+  display: flex; flex-direction: column; gap: 4px;
+  padding-top: 14px; border-top: 1px solid var(--border);
 }
 .lb-caption-title {
   font-family: var(--font-head); font-size: clamp(1rem, 2vw, 1.5rem);
@@ -755,31 +775,6 @@ section h2.active { letter-spacing:4px; opacity:1; transform:translateY(0); }
 }
 .segment-title:hover { color: var(--cyan); border-color: var(--cyan-40); }
 
-/* ══ MODAL ══ */
-.modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.94); backdrop-filter: blur(10px); justify-content: center; align-items: center; }
-.modal-content { background: var(--surface); margin: 15px; padding: 30px; border: 1px solid var(--border); width: 90%; max-width: 1100px; border-radius: var(--r-lg); position: relative; max-height: calc(100vh - 30px); overflow-y: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.8); }
-.modal-container { display: flex; gap: 20px; align-items: flex-start; }
-.modal-left-image { width: 400px; height: 240px; flex: 0 0 auto; position: relative; overflow: hidden; border-radius: var(--r-md); }
-#modal-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; border-radius: var(--r-md); object-fit: cover; }
-.modal-right-text { flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: flex-start; padding: 5px; align-items: center; }
-#modal-description { font-size: .82rem; line-height: 1.65; margin: 15px 0; text-align: justify; max-width: 80%; color: var(--muted); }
-.modal-button { background: transparent; color: var(--cyan); border: 1px solid var(--cyan-40); padding: 12px 28px; font-size: .75rem; border-radius: var(--r-sm); transition: all .3s var(--ease); font-family: var(--font-body); font-weight: 500; letter-spacing: 2px; text-transform: uppercase; text-align: center; text-decoration: none; display: block; }
-.modal-button:hover { background: var(--cyan); color: #000; border-color: var(--cyan); }
-.close-btn { position: absolute; top: 14px; right: 16px; z-index: 10; font-size: 24px; color: var(--muted); cursor: pointer; transition: color .2s; font-family: var(--font-body); font-weight: 300; }
-.close-btn:hover { color: var(--white); }
-
-/* ══ GRID KWADRATY ══ */
-.grid-kwadraty { display: grid; grid-template-columns: repeat(5,1fr); gap: 20px; margin-top: 20px; }
-.kwadrat { aspect-ratio: 1; overflow: hidden; border-radius: var(--r-md); border: 1px solid var(--border); cursor: pointer; transition: all .3s var(--ease); box-shadow: 0 4px 16px rgba(0,0,0,0.45); }
-.kwadrat img { width: 100%; height: 100%; object-fit: cover; }
-.kwadrat:hover { transform: scale(1.04); border-color: var(--cyan-40); box-shadow: 0 8px 28px rgba(0,0,0,0.6); }
-
-/* ══ FOOTER PROJEKT ══ */
-.footerproject-modern { display: flex; justify-content: space-between; padding: 40px 10%; max-width: 100%; margin: 0; border-top: 1px solid var(--border); }
-.footerproject-modern a { text-decoration: none; }
-.footerproject-modern .segment-title { margin: 0; cursor: pointer; display: inline-block; }
-.footerproject-modern a:hover .segment-title { color: var(--cyan); border-color: var(--cyan-40); }
-
 /* ══════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════ */
@@ -795,7 +790,6 @@ section h2.active { letter-spacing:4px; opacity:1; transform:translateY(0); }
 @media (max-width:900px) {
   .hamburger-menu { display: block; }
 
-  /* PANEL BOCZNY — wysuwa się z prawej strony ekranu */
   .nav-links {
     position: fixed;
     top: 0; right: -220px;
@@ -837,12 +831,10 @@ section h2.active { letter-spacing:4px; opacity:1; transform:translateY(0); }
   .hero-right-content { max-width: 100%; text-align: center; }
   .hero h1 { font-size: 1.8rem; text-align: center; }
   .hero-sub, .hero-omnie p { text-align: center; }
-  /* projekty zostają 2 kolumny do 768px */
   .contact-meta { grid-template-columns: 1fr; }
   .contact-meta-item:not(:last-child) { border-right: none; border-bottom: 1px solid var(--border); }
   .bridge-line { width: 50px; }
 
-  /* ── Zmniejszone odstępy między tytułami/sekcjami ── */
   section h2 { padding-top: 20px; }
   .section-category { margin: 36px 0 0; padding: 10px 0 12px; }
   .section-sub-label { padding: 26px 0 12px; }
@@ -873,7 +865,7 @@ section h2.active { letter-spacing:4px; opacity:1; transform:translateY(0); }
   #prev-btn, .prev-btn { left: 8px; }
   #next-btn, .next-btn { right: 8px; }
   #lightbox { gap: 6px; padding-top: 172px; }
-  #lightbox-img { width: 400px; max-width: 70vw; height: auto; }
+  #lightbox-img { width: 400px; max-width: 70vw; height: 40vh; }
   .lightbox-header { top: 72px; }
   .lightbox-header h1 { font-size: 1.1rem; margin-bottom: 4px; }
   .lightbox-header p { font-size: .55rem; letter-spacing: 3px; }
@@ -926,13 +918,10 @@ section h2.active { letter-spacing:4px; opacity:1; transform:translateY(0); }
   animation: blobLabelFade 3.6s ease-in-out infinite; transition: opacity 0.4s ease;
 }
 
-/* Tablet: łuk i offsety trochę mniejsze, żeby mieściły się w węższej kolumnie */
 @media (max-width:1100px) {
   .blob-hint { left: 52%; top: 36%; }
 }
 
-/* Mobile: canvas ma teraz stałą, umiarkowaną wysokość (42vh, min 260px) — chowamy łuk i kropkę
-   (za duże na tak mały obszar), a ikonkę z napisem centrujemy w środku canvasu */
 @media (max-width:900px) {
   .blob-hint {
     left: 50%; top: 50%; transform: translate(-50%,-50%);

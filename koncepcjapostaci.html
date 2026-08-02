@@ -7,8 +7,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Michroma&family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" /> 
 
+    <style>
+        /* Tylko układ siatki — reszta (karty, slider, kursor) korzysta ze wspólnego style.css */
+        .lego-grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .lego-grid-container .galeria-item {
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
+            margin-bottom: 0;
+        }
+    </style>
 </head>
-<body class="project-background">
+<body class="project-background slider-has-header">
+
+    <div id="scroll-progress"></div>
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
 
     <nav>
         <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
@@ -28,31 +48,31 @@
             <div class="project-segment">
                 <span class="segment-title">Koncepcja postaci</span>
                 
-                <div class="lego-grid-container">
-                    <script>
-                        const container = document.querySelector('.lego-grid-container');
-                        for (let i = 1; i <= 2; i++) {
-                            const item = document.createElement('div');
-                            item.className = 'galeria-item';
-                            const imgPath = `img/lab/postac/postac_ (${i}).png`;
-                            item.setAttribute('data-full', imgPath);
-                            item.innerHTML = `<img src="${imgPath}" loading="lazy" alt="Lego Scena ${i}">`;
-                            container.appendChild(item);
-                        }
-                    </script>
-                </div>
+                <div class="lego-grid-container" id="gallery-container"></div>
             </div>
             
         </div>
     </main>
 
     <div id="slider-modal">
-        <span class="close-slider">&times;</span>
-        <button class="nav-btn" id="prev-btn">&#10094;</button>
-        <div class="slider-content">
-            <img src="" id="slider-img">
+        <nav class="lightbox-nav">
+            <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
+            <div class="nav-links">
+                <a href="javascript:void(0);" class="close-lightbox">Powrót | Koncepcja postaci</a>
+            </div>
+        </nav>
+        <div class="lightbox-header">
+            <h1>Grafika Projektowa</h1>
+            <p>Modelowanie i Wizualizacje 3D</p>
         </div>
-        <button class="nav-btn" id="next-btn">&#10095;</button>
+        <button class="lb-nav" id="prev-btn">&#10094;</button>
+        <div class="slider-main">
+            <div class="slider-content">
+                <img src="" id="slider-img" alt="Powiększony projekt">
+            </div>
+            <div class="slider-thumbs" id="slider-thumbs"></div>
+        </div>
+        <button class="lb-nav" id="next-btn">&#10095;</button>
     </div>
 
 <footer>
@@ -68,16 +88,67 @@
 </footer>
 
     <script>
+        const container = document.getElementById('gallery-container');
+        for (let i = 1; i <= 2; i++) {
+            const item = document.createElement('div');
+            item.className = 'galeria-item';
+            const imgPath = `img/lab/postac/postac_ (${i}).png`;
+            item.setAttribute('data-full', imgPath);
+            item.innerHTML = `<img src="${imgPath}" loading="lazy" alt="Koncepcja postaci ${i}">`;
+            container.appendChild(item);
+        }
+
+        /* ══ KURSOR — kółko powiększające się na hover (jak na stronie głównej) ══ */
+        const cursor     = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursor-ring');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+
+        if (cursor) {
+            document.addEventListener('mousemove', e => {
+                mx = e.clientX; my = e.clientY;
+                cursor.style.left = mx + 'px';
+                cursor.style.top  = my + 'px';
+            });
+
+            (function animCursor() {
+                rx += (mx - rx) * 0.12;
+                ry += (my - ry) * 0.12;
+                if (cursorRing) {
+                    cursorRing.style.left = rx + 'px';
+                    cursorRing.style.top  = ry + 'px';
+                }
+                requestAnimationFrame(animCursor);
+            })();
+
+            document.querySelectorAll('a, button, .galeria-item, .lb-nav, .close-lightbox').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+            });
+        }
+
+        /* ══ SCROLL PROGRESS ══ */
+        const scrollBar = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            if (scrollBar) {
+                const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+                scrollBar.style.width = pct + '%';
+            }
+        });
+
+        /* ══ SLIDER / LIGHTBOX ══ */
         const modal = document.getElementById('slider-modal');
         const sliderImg = document.getElementById('slider-img');
-        const closeBtn = document.querySelector('.close-slider');
+        const sliderThumbs = document.getElementById('slider-thumbs');
+        const closeBtn = document.querySelector('.close-lightbox');
         let currentIndex = 0;
         let images = [];
 
         window.onload = () => {
             const items = document.querySelectorAll('.galeria-item');
             images = Array.from(items).map(item => item.getAttribute('data-full'));
-            
+
+            buildThumbs();
+
             items.forEach((item, index) => {
                 item.onclick = () => {
                     currentIndex = index;
@@ -88,7 +159,30 @@
             });
         };
 
-        function showImage() { sliderImg.src = images[currentIndex]; }
+        function buildThumbs() {
+            if (!sliderThumbs) return;
+            sliderThumbs.innerHTML = '';
+            images.forEach((src, i) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'slider-thumb';
+                thumb.innerHTML = `<img src="${src}" alt="Miniatura ${i + 1}">`;
+                thumb.onclick = () => {
+                    currentIndex = i;
+                    showImage();
+                };
+                sliderThumbs.appendChild(thumb);
+            });
+        }
+
+        function showImage() {
+            sliderImg.src = images[currentIndex];
+            if (sliderThumbs) {
+                sliderThumbs.querySelectorAll('.slider-thumb').forEach((t, i) => {
+                    t.classList.toggle('active', i === currentIndex);
+                });
+            }
+        }
+
         function moveNext() { currentIndex = (currentIndex + 1) % images.length; showImage(); }
         function movePrev() { currentIndex = (currentIndex - 1 + images.length) % images.length; showImage(); }
 
