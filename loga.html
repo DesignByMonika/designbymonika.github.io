@@ -10,9 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body class="project-background">
-    <nav>
+
+    <div id="scroll-progress"></div>
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+
+    <nav id="main-nav">
         <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
-        <div class="nav-links">
+        <div class="nav-links" id="nav-links">
             <a href="index.html#grafika-projektowa">Powrót</a>
         </div>
     </nav>
@@ -30,25 +35,22 @@
 
             <section class="project-segment" style="margin-top: 60px;">
                 <div class="projekty-grid">
-                    <div class="card" data-image="img/okladki/logo_bioswift_okladka.jpg" data-title="Księga Znaku 01" data-description="Ksiega znaku dla marki BioSwift. Narzędzia: InDesign" data-link="bioswift_icon.html">
-                        <div class="card-visual"><img src="img/okladki/logo_bioswift_okladka.jpg" alt="logo BioSwift"></div>
-                        <div class="card-info"><p class="card-project-title">Księga Znaku 01</p></div>
-                    </div>
-                    <div class="card" data-image="img/branding_okladka.jpg" data-title="Branding 02" data-description="System identyfikacji marki." data-link="projekt-2.html">
-                        <div class="card-visual"></div>
-                        <div class="card-info"><p class="card-project-title">Księga Znaku 02</p></div>
-                    </div>
+                    <a class="card" data-index="01" href="bioswift_icon.html">
+                        <div class="card-visual"><div class="card-visual-hover-overlay"></div><img src="img/okladki/logo_bioswift_okladka.jpg" alt="logo BioSwift"></div>
+                        <div class="card-info"><span class="card-category">Księga znaku</span><p class="card-project-title">Księga Znaku 01</p><span class="card-arrow">↗</span></div>
+                    </a>
                 </div>
             </section>
 
             <section class="project-segment" style="margin-top: 60px;">
                 <header class="project-segment">
                     <h1>Loga</h1>
+                    <p>Zbiór zaprojektowanych logotypów</p>
                 </header>
                 <div class="grid-kwadraty" data-gallery="loga">
-                    <div class="kwadrat"><img src="img/icon/loga/happyhome.jpg" alt="Logo 1"></div>
-                    <div class="kwadrat"><img src="img/icon/loga/logoMexican.png" alt="Logo 2"></div>
-                    <div class="kwadrat"><img src="img/icon/loga/sunnypost.jpg" alt="Logo 3"></div>
+                    <div class="kwadrat"><img src="img/icon/loga/happyhome.jpg" alt="HappyHome" data-desc="Logo dla marki wnętrzarskiej"></div>
+                    <div class="kwadrat"><img src="img/icon/loga/logoMexican.png" alt="Mexican" data-desc="Logo restauracji meksykańskiej"></div>
+                    <div class="kwadrat"><img src="img/icon/loga/sunnypost.jpg" alt="SunnyPost" data-desc="Logo serwisu SunnyPost"></div>
                 </div>
             </section>
         </div>
@@ -66,91 +68,26 @@
   </div>
 </footer>
 
-    <div id="project-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div class="modal-container">
-                <div class="modal-left-image"><img src="" alt="" id="modal-image"></div>
-                <div class="modal-right-text">
-                    <a href="#" target="_blank" class="modal-button" id="modal-link">Zobacz Projekt</a>
-                    <p id="modal-description"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div id="lightbox">
-        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
-        <button class="nav-btn prev-btn" onclick="changeImage(-1)">&#10094;</button>
-        <img id="lightbox-img" src="">
-        <button class="nav-btn next-btn" onclick="changeImage(1)">&#10095;</button>
+        <nav class="lightbox-nav">
+            <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
+            <div class="nav-links">
+                <a href="javascript:void(0);" class="close-lightbox">Powrót | Loga i Ikonografia</a>
+            </div>
+        </nav>
+        <div class="lightbox-header">
+            <h1>Grafika projektowa</h1>
+            <p>Loga i ikonografia</p>
+        </div>
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+        <button class="lb-nav lb-prev">&#10094;</button>
+        <div class="lightbox-main">
+            <img id="lightbox-img" src="">
+            <div class="lightbox-thumbs" id="lightbox-thumbs"></div>
+        </div>
+        <button class="lb-nav lb-next">&#10095;</button>
     </div>
 
-    <script>
-        const modal = document.getElementById('project-modal');
-        const modalImage = document.getElementById('modal-image');
-        const modalLink = document.getElementById('modal-link');
-        const modalDesc = document.getElementById('modal-description');
-        const closeBtn = document.querySelector('.close-btn');
-
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', () => {
-                modalImage.src = card.getAttribute('data-image');
-                modalLink.href = card.getAttribute('data-link');
-                modalDesc.innerText = card.getAttribute('data-description');
-                modal.style.display = 'flex';
-            });
-        });
-
-        closeBtn.onclick = () => { modal.style.display = 'none'; };
-        window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
-
-        let currentGalleryImages = [];
-        let currentImageIndex = 0;
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-
-        document.querySelectorAll('.grid-kwadraty').forEach(gallery => {
-            const imgs = Array.from(gallery.querySelectorAll('.kwadrat img'));
-            gallery.querySelectorAll('.kwadrat').forEach((item, index) => {
-                item.addEventListener('click', () => {
-                    currentGalleryImages = imgs;
-                    openLightbox(index);
-                });
-            });
-        });
-
-        function openLightbox(index) {
-            currentImageIndex = index;
-            updateLightboxImage();
-            lightbox.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        function changeImage(step) {
-            currentImageIndex += step;
-            if (currentImageIndex >= currentGalleryImages.length) currentImageIndex = 0;
-            if (currentImageIndex < 0) currentImageIndex = currentGalleryImages.length - 1;
-            updateLightboxImage();
-        }
-
-        function updateLightboxImage() {
-            lightboxImg.src = currentGalleryImages[currentImageIndex].src;
-        }
-
-        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-        document.addEventListener('keydown', (e) => {
-            if (lightbox.style.display === 'flex') {
-                if (e.key === 'ArrowLeft') changeImage(-1);
-                if (e.key === 'ArrowRight') changeImage(1);
-                if (e.key === 'Escape') closeLightbox();
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
-</html>
+</html>prz

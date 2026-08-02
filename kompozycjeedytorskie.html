@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Michroma&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 </head>
-<body class="project-background">
+<body class="project-background slider-has-header">
 
     <nav>
         <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
@@ -25,12 +25,24 @@
     </main>
 
     <div id="slider-modal">
-        <span class="close-slider">&times;</span>
-        <button class="nav-btn" id="prev-btn">&#10094;</button>
-        <div class="slider-content">
-            <img src="" id="slider-img" alt="Powiększony projekt">
+        <nav class="lightbox-nav">
+            <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
+            <div class="nav-links">
+                <a href="javascript:void(0);" class="close-slider">Powrót | Kompozycje edytorskie</a>
+            </div>
+        </nav>
+        <div class="lightbox-header">
+            <h1>Projektowanie graficzne</h1>
+            <p>Kompozycje edytorskie</p>
         </div>
-        <button class="nav-btn" id="next-btn">&#10095;</button>
+        <button class="lb-nav" id="prev-btn">&#10094;</button>
+        <div class="slider-main">
+            <div class="slider-content">
+                <img src="" id="slider-img" alt="Powiększony projekt">
+            </div>
+            <div class="slider-thumbs" id="slider-thumbs"></div>
+        </div>
+        <button class="lb-nav" id="next-btn">&#10095;</button>
     </div>
 
 <footer>
@@ -59,6 +71,7 @@
 
         const modal = document.getElementById('slider-modal');
         const sliderImg = document.getElementById('slider-img');
+        const sliderThumbs = document.getElementById('slider-thumbs');
         const closeBtn = document.querySelector('.close-slider');
         let currentIndex = 0;
         let images = [];
@@ -66,6 +79,8 @@
         window.onload = () => {
             const items = document.querySelectorAll('.galeria-item');
             images = Array.from(items).map(item => item.getAttribute('data-full'));
+
+            buildThumbs();
 
             items.forEach((item, index) => {
                 item.onclick = () => {
@@ -77,9 +92,29 @@
             });
         };
 
+        function buildThumbs() {
+            if (!sliderThumbs) return;
+            sliderThumbs.innerHTML = '';
+            images.forEach((src, i) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'slider-thumb';
+                thumb.innerHTML = `<img src="${src}" alt="Miniatura ${i + 1}">`;
+                thumb.onclick = () => {
+                    currentIndex = i;
+                    showImage();
+                };
+                sliderThumbs.appendChild(thumb);
+            });
+        }
+
         function showImage() { 
             if (images[currentIndex]) {
                 sliderImg.src = images[currentIndex]; 
+            }
+            if (sliderThumbs) {
+                sliderThumbs.querySelectorAll('.slider-thumb').forEach((t, i) => {
+                    t.classList.toggle('active', i === currentIndex);
+                });
             }
         }
 

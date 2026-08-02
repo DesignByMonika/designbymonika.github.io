@@ -165,7 +165,6 @@ if (canvasBlob && typeof THREE !== 'undefined') {
     blobMouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
   });
 
-  /* ── KURSOR grab na canvasie ── */
   canvasBlob.style.cursor = 'grab';
   canvasBlob.style.touchAction = 'none';
 
@@ -179,7 +178,6 @@ if (canvasBlob && typeof THREE !== 'undefined') {
     canvasBlob.style.cursor = 'grab';
   });
 
-  /* ── KLIK — zmiana koloru + deformacja ── */
   function triggerBlobClick() {
     currentBlobColorIndex = (currentBlobColorIndex + 1) % blobColors.length;
     const nc = new THREE.Color(blobColors[currentBlobColorIndex]);
@@ -193,7 +191,6 @@ if (canvasBlob && typeof THREE !== 'undefined') {
   }
   canvasBlob.addEventListener('click', triggerBlobClick);
 
-  /* ── DRAG TO SPIN — mysz ── */
   let isDragging = false;
   let dragLastX = 0, dragLastY = 0;
   let dragVelX = 0, dragVelY = 0;
@@ -226,7 +223,6 @@ if (canvasBlob && typeof THREE !== 'undefined') {
     canvasBlob.style.cursor = 'grab';
   });
 
-  /* ── DRAG TO SPIN — dotyk (telefon / tablet) ── */
   canvasBlob.addEventListener('touchstart', e => {
     if (!e.touches || !e.touches.length) return;
     isDragging = true;
@@ -254,7 +250,6 @@ if (canvasBlob && typeof THREE !== 'undefined') {
     if (!dragMoved) triggerBlobClick();
   });
 
-  /* ── UKRYJ HINT po pierwszej interakcji ── */
   const blobHintEl    = document.getElementById('blob-hint');
   const blobHintArc   = document.querySelector('.blob-hint-arc');
   const blobHintLabel = document.querySelector('.blob-hint-label');
@@ -271,7 +266,6 @@ if (canvasBlob && typeof THREE !== 'undefined') {
     canvasBlob.addEventListener('touchstart', hideHint, { once: true, passive: true });
   }
 
-  /* ── NAPRZEMIENNE NAPISY: pokręć mną / kliknij ── */
   const blobLabelEl = document.getElementById('blob-hint-label');
   if (blobLabelEl) {
     const labels = ['pokręć mną', 'kliknij'];
@@ -286,7 +280,6 @@ if (canvasBlob && typeof THREE !== 'undefined') {
     }, 2200);
   }
 
-  /* ── PĘTLA ANIMACJI ── */
   (function animBlob() {
     requestAnimationFrame(animBlob);
 
@@ -392,6 +385,8 @@ if (sliderModal) {
 const lightbox = document.getElementById('lightbox');
 if (lightbox) {
   const lightboxImg     = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxThumbs  = document.getElementById('lightbox-thumbs');
   const closeLightboxEl = document.querySelector('.close-lightbox');
   let lbImages = [];
   let lbIndex  = 0;
@@ -402,6 +397,7 @@ if (lightbox) {
       item.addEventListener('click', () => {
         lbImages = imgs;
         lbIndex  = index;
+        buildThumbs();
         updateLightbox();
         lightbox.style.display = 'flex';
         document.body.style.overflow = 'hidden';
@@ -409,7 +405,38 @@ if (lightbox) {
     });
   });
 
-  function updateLightbox() { if (lightboxImg && lbImages[lbIndex]) lightboxImg.src = lbImages[lbIndex].src; }
+  function buildThumbs() {
+    if (!lightboxThumbs) return;
+    lightboxThumbs.innerHTML = '';
+    lbImages.forEach((img, i) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'lightbox-thumb';
+      thumb.innerHTML = `<img src="${img.src}" alt="${img.alt || ''}">`;
+      thumb.addEventListener('click', () => {
+        lbIndex = i;
+        updateLightbox();
+      });
+      lightboxThumbs.appendChild(thumb);
+    });
+  }
+
+  function updateLightbox() {
+    if (lightboxImg && lbImages[lbIndex]) lightboxImg.src = lbImages[lbIndex].src;
+    if (lightboxCaption) {
+      const img = lbImages[lbIndex];
+      const title = img && img.alt ? img.alt : '';
+      const desc  = img && img.dataset ? img.dataset.desc : '';
+      lightboxCaption.innerHTML = title
+        ? `<span class="lb-caption-title">${title}</span>${desc ? `<span class="lb-caption-desc">${desc}</span>` : ''}`
+        : '';
+    }
+    if (lightboxThumbs) {
+      lightboxThumbs.querySelectorAll('.lightbox-thumb').forEach((t, i) => {
+        t.classList.toggle('active', i === lbIndex);
+      });
+    }
+  }
+
   function lbNext() { lbIndex = (lbIndex + 1) % lbImages.length; updateLightbox(); }
   function lbPrev() { lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; updateLightbox(); }
 

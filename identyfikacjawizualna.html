@@ -1,41 +1,58 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Identyfikacja wizualna | Portfolio Monika</title>
-    <link rel="stylesheet" href="style.css"> 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Michroma&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <title>Identyfikacja wizualna | Grafika projektowa | Portfolio Monika</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
 </head>
 <body class="project-background">
 
-    <nav>
+    <div id="scroll-progress"></div>
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+
+    <nav id="main-nav">
         <span class="logo-portfolio"><a href="index.html">Portfolio</a></span>
-        <div class="nav-links">
+        <div class="nav-links" id="nav-links">
             <a href="index.html#grafika-projektowa">Powrót</a>
+        </div>
+            <div class="hamburger-menu" id="hamburger-btn">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
         </div>
     </nav>
 
-    <header class="page-header">
-        <h1>Grafika projektowa</h1>
-        <p>Identyfikacja wizualna</p>
-    </header>
+    <main class="project-detail-container-minimal">
+        <div class="image-box-minimal">
+            <header class="page-header">
+            <h1>Grafika projektowa</h1>
+            <p>Identyfikacja wizualna</p>
+            </header>
 
-    <main class="masonry-container" id="gallery-container">
-    </main>
+            <header class="project-segment">
+                <h1>Identyfikacja wizualna</h1>
+                <p>Koncepcja graficzna</p>
+            </header>
 
-    <div id="slider-modal">
-        <span class="close-slider">&times;</span>
-        <button class="nav-btn" id="prev-btn">&#10094;</button>
-        <div class="slider-content">
-            <img src="" id="slider-img" alt="Powiększony projekt">
+            <div class="project-segment">
+                <span class="segment-title">1. KONCEPCJA GRAFICZNA</span>
+                <img
+                    src="img/projektowanie_graficzne/identyfikacja_wizualna/identyfikacja_wizualna_1.jpg"
+                    alt="Zrzut ekranu: Identyfikacja wizualna"
+                    class="full-width-image"
+                >
+            </div>
+
         </div>
-        <button class="nav-btn" id="next-btn">&#10095;</button>
-    </div>
+    </main>
 
 <footer>
   <div class="footer-inner">
-   <div class="footer-copy">&copy; 2026 &nbsp;<span> designbymonika.github.io </span> &nbsp;·&nbsp;monikadesigndev@intmail.pl</div>
+    <div class="footer-copy">&copy; 2026 &nbsp;<span> designbymonika.github.io </span> &nbsp;·&nbsp;monikadesigndev@intmail.pl</div>
     <div class="footer-mark">Creative Technologist</div>
     <div class="footer-meta">
       <span class="footer-tag">Design</span>
@@ -45,73 +62,6 @@
   </div>
 </footer>
 
-    <script>
-
-        const container = document.getElementById('gallery-container');
-        const liczbaIlustracji = 1;
-
-        for (let i = 1; i <= liczbaIlustracji; i++) {
-            const item = document.createElement('div');
-            item.className = 'galeria-item';
-            const imgPath = `img/projektowanie_graficzne/identyfikacja_wizualna/identyfikacja_wizualna_${i}.jpg`;
-            item.setAttribute('data-full', imgPath);
-            item.innerHTML = `<img src="${imgPath}" loading="lazy" alt="Projekt Identyfikacja ${i}">`;
-            container.appendChild(item);
-        }
-
-        const modal = document.getElementById('slider-modal');
-        const sliderImg = document.getElementById('slider-img');
-        const closeBtn = document.querySelector('.close-slider');
-        let currentIndex = 0;
-        let images = [];
-
-        window.onload = () => {
-            const items = document.querySelectorAll('.galeria-item');
-            images = Array.from(items).map(item => item.getAttribute('data-full'));
-
-            items.forEach((item, index) => {
-                item.onclick = () => {
-                    currentIndex = index;
-                    showImage();
-                    modal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                };
-            });
-        };
-
-        function showImage() { 
-            if (images[currentIndex]) {
-                sliderImg.src = images[currentIndex]; 
-            }
-        }
-
-        function moveNext() { 
-            currentIndex = (currentIndex + 1) % images.length; 
-            showImage(); 
-        }
-
-        function movePrev() { 
-            currentIndex = (currentIndex - 1 + images.length) % images.length; 
-            showImage(); 
-        }
-
-        document.getElementById('next-btn').onclick = (e) => { e.stopPropagation(); moveNext(); };
-        document.getElementById('prev-btn').onclick = (e) => { e.stopPropagation(); movePrev(); };
-        
-        closeBtn.onclick = () => { 
-            modal.style.display = 'none'; 
-            document.body.style.overflow = 'auto'; 
-        };
-
-        modal.onclick = (e) => { if(e.target === modal) closeBtn.onclick(); };
-
-        document.addEventListener('keydown', (e) => {
-            if (modal.style.display === 'flex') {
-                if (e.key === "ArrowRight") moveNext();
-                if (e.key === "ArrowLeft") movePrev();
-                if (e.key === "Escape") closeBtn.onclick();
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
